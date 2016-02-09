@@ -14,7 +14,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using TrackMyActV2.Pages;
 using Windows.Storage;
-
+using TrackMyActV2.Libraries;
+using TrackMyActV2.Models;
+using System.Collections.ObjectModel;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace TrackMyActV2
@@ -24,13 +26,21 @@ namespace TrackMyActV2
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private Library library;
+        public ObservableCollection<ActivityData> activity { get; set; }
+        public ObservableCollection<TimerData> tmdata { get; set; }
+        private RootObjectTrackAct rtrackact;
         public MainPage()
         {
             this.InitializeComponent();
+            library = new Library();
+            activity = new ObservableCollection<ActivityData>();
+            tmdata = new ObservableCollection<TimerData>();
+            rtrackact = new RootObjectTrackAct();
             Loaded += MainPage_Loaded;
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)
             {
@@ -39,8 +49,29 @@ namespace TrackMyActV2
             }
             else
             {
-                ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
-                
+                if(await library.checkIfFileExists("activityDB"))
+                {
+                    ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
+                    string fileres = await library.readFile("activityDB");
+                    rtrackact = TrackAct.trackactDataDeserializer(fileres);
+                    var activityD = rtrackact.activity;
+                    foreach (var actv in activityD)
+                    {
+                        activity.Add(actv);
+                    }
+                    var timedata = rtrackact.activity[0].timer_data;
+                    foreach (var tdata in timedata)
+                    {
+                        tmdata.Add(tdata);
+                    }
+                }
+                else
+                {
+                    ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
+                    Frame rootFrame = Window.Current.Content as Frame;
+                    rootFrame.Navigate(typeof(TimerPage));
+                }
+                               
             }
         }
 
