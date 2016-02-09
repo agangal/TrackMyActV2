@@ -7,7 +7,43 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid x:Name="introGrid" Visibility="Collapsed">
+            <FlipView x:Name="flipviewFirstLaunch" Margin="10" HorizontalAlignment="Center" Grid.RowSpan="4">
+                <!--<Grid>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" Text="How-To Track Your Act" FontSize="20" Margin="20"></TextBlock>
+                    <Image Source="/Images/HitGo.png" Margin="50"></Image>
+                </Grid>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" Text="How-To Track Your Act" FontSize="20" Margin="20"></TextBlock>
+                    <Image Source="/Images/SeeYourStats.png" Margin="50"></Image>
+                </Grid>-->
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Grid.Row="0" Foreground="#f3f4f7"
+                               Grid.Column="1" FontSize="17"
+                               HorizontalAlignment="Center" 
+                               TextAlignment="Center" 
+                               TextWrapping="WrapWholeWords"
+                               VerticalAlignment="Top" 
+                               Text="What do you want to track?"></TextBlock>
+                    <TextBlock Text="Activity" FontSize="8" Foreground="#f3f4f7" Margin="30,20,30,0"></TextBlock>
+                    <TextBox Name="activity_nameBox" Width="300" Margin="30,10,30,30" 
+                             HorizontalAlignment="Center" 
+                             VerticalAlignment="Center"></TextBox>
+                    <TextBlock Text="Description" FontSize="8" Foreground="#f3f4f7" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,20,30,0"></TextBlock>
+                    <TextBox Name="description" Width="300" Margin="30,10,30,30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                    <Button Grid.Row="2" 
+                            Foreground="White"
+                            Background="#6ED19D" 
+                            Grid.Column="1" FontSize="20"
+                            Width="200" Content="Let's Go" 
+                            Margin="30"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Top" 
+                            Name="introGo" Click="introGo_Click"></Button>
+                </StackPanel>
 
+            </FlipView>
+        </Grid>
     </Grid>
 </Page>
