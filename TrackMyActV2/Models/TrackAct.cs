@@ -59,6 +59,8 @@ namespace TrackMyActV2.Models
         [DataMember]
         public long totalTime { get; set; }
         [DataMember]
+        public string description { get; set; }
+        [DataMember]
         public List<TimerData> timer_data { get; set; }
     }
 
