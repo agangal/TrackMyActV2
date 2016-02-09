@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using TrackMyActV2.Pages;
+using Windows.Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -31,8 +32,18 @@ namespace TrackMyActV2
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(TimerPage));
+            if (ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)
+            {
+                Frame rootFrame = Window.Current.Content as Frame;
+                rootFrame.Navigate(typeof(TimerPage));
+            }
+            else
+            {
+                ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
+                
+            }
         }
+
+        
     }
 }

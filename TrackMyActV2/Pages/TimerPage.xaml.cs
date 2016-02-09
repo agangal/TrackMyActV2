@@ -114,7 +114,7 @@ namespace TrackMyActV2.Pages
 
         private void firstLaunch()
         {
-            ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = true;
+            //ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = true;  
             StatisticsGrid.Opacity = 0;
             personalBestGrid.Opacity = 0;
             //ApplicationData.Current.LocalSettings.Values["CurrentAct"] = "In Private Mode";
@@ -189,7 +189,10 @@ namespace TrackMyActV2.Pages
             RefreshUI();
             string res = TrackAct.trackactSerializer(rtrackact);
             await library.writeFile("activityDB", res);
-
+            if(ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)
+            {
+                ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
+            }
         }
 
         private void RefreshUI()
@@ -199,7 +202,7 @@ namespace TrackMyActV2.Pages
             personalBest.Visibility = Visibility.Visible;
             //string res = await library.readFile("activityDB");
             //RootObjectTrackAct rtrackact = TrackAct.trackactDataDeserializer(res);
-            if ((bool)ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == true)
+            if (ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)    // if it's the first launch.
             {
                 try
                 {
