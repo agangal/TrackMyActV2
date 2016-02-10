@@ -47,9 +47,9 @@
                         <TextBlock Text="{x:Bind description}" Margin="23,2,5,10" Foreground="#f3f4f7" FontSize="12"></TextBlock>
 
                         <StackPanel Orientation="Horizontal" Margin="23,2,5,10">
-                            <TextBlock Text="You have spent " Foreground="#f3f4f7" FontSize="12"></TextBlock>
+                            <TextBlock Text="You have spent" Foreground="#f3f4f7" FontSize="12"></TextBlock>
                             <TextBlock Text="{x:Bind totalTime}" TextWrapping="WrapWholeWords" Margin="5,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
-                            <TextBlock Text=" seconds on this activity" TextWrapping="WrapWholeWords" Margin="3,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
+                            <TextBlock Text="seconds on this activity" TextWrapping="WrapWholeWords" Margin="3,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
 
                         </StackPanel>
                         <Border BorderBrush="#625F80" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="0" BorderThickness="0,0,0,1"></Border>

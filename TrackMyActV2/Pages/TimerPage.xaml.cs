@@ -450,7 +450,7 @@ namespace TrackMyActV2.Pages
 
         private void introGo_Click(object sender, RoutedEventArgs e)
         {
-            if (introBox.Text != "")
+            if ((introBox.Text != ""))
             {
                 ApplicationData.Current.LocalSettings.Values["CurrentAct"] = introBox.Text;
                 ApplicationData.Current.LocalSettings.Values["Description"] = description.Text;
