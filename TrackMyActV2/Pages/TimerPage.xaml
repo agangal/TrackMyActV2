@@ -306,6 +306,11 @@
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
+    <Page.Transitions>
+        <TransitionCollection>
+            <EntranceThemeTransition/>
+        </TransitionCollection>
+    </Page.Transitions>
 
     <Grid>
         <Grid x:Name="introGrid" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

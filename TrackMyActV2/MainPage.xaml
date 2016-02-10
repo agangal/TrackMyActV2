@@ -11,6 +11,11 @@
     <Page.Resources>
         <converter:BooleanToVisibilityConvertor x:Key="visibilityConver"/>
     </Page.Resources>
+    <Page.Transitions>
+        <TransitionCollection>
+            <EntranceThemeTransition/>
+        </TransitionCollection>
+    </Page.Transitions>
 
 
     <Grid x:Name="mainGrid" Visibility="Visible">
