@@ -40,7 +40,7 @@
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   IsSwipeEnabled="True"
-                  
+                  CanReorderItems="True" CanDrag="True" AllowDrop="True"
                   ItemsSource="{x:Bind activity}"
                   IsItemClickEnabled="True"
                   Grid.Row="2">
