@@ -39,6 +39,8 @@
                   ItemClick="dataListView_ItemClick"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
+                  IsSwipeEnabled="True"
+                  
                   ItemsSource="{x:Bind activity}"
                   IsItemClickEnabled="True"
                   Grid.Row="2">
