@@ -106,6 +106,8 @@ namespace TrackMyActV2.Pages
             }
             else
             {
+                string actname = (string)e.Parameter;
+                ApplicationData.Current.LocalSettings.Values["CurrentAct"] = actname;
                 introGrid.Visibility = Visibility.Collapsed;
                 mainPageGrid.Visibility = Visibility.Visible;
                 stuffToDoWhenNavigatedTo();
@@ -221,6 +223,7 @@ namespace TrackMyActV2.Pages
                     //lastTime.Text = ractivitydata.lastattempt;
                     ractivitydata.timer_data = new List<TimerData>();
                     ractivitydata.timer_data.Add(tdata);
+                    ractivitydata.description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
                     ractivitydata.personal_best = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
                     ractivitydata.median = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
                     ractivitydata.ninetypercentile = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
@@ -258,6 +261,7 @@ namespace TrackMyActV2.Pages
                     ractivitydata.name = activityName.Text;
                     ractivitydata.createdTime = DateTime.UtcNow;
                     ractivitydata.totalTime = 0;
+                    ractivitydata.description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
                     TimerData tdata = new TimerData();
                     //tdata.position = 0;             // Since this is a new activity, it won't have any data already associated with it.
                     tdata.time_in_seconds = (long)timerdata_TimeSpan.TotalSeconds;
@@ -301,6 +305,7 @@ namespace TrackMyActV2.Pages
                     rtrackact.activity[activity_pos].totalTime = rtrackact.activity[activity_pos].totalTime + tdata.time_in_seconds;
                     rtrackact.activity[activity_pos].median = String.Format("{0:00}:{1:00}:{2:00}", mediansec / 3600, (mediansec / 60) % 60, mediansec % 60);
                     rtrackact.activity[activity_pos].lastattempt = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    rtrackact.activity[activity_pos].description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
                     // lastTime.Text = rtrackact.activity[activity_pos].lastattempt;
                     int pos = (int)(0.9 * (time_in_seconds.Count - 1) + 1); // 0 1 3 4 5 8
                     long ninentypercentilesecond = (time_in_seconds.ElementAtOrDefault(pos));
@@ -448,6 +453,7 @@ namespace TrackMyActV2.Pages
             if (introBox.Text != "")
             {
                 ApplicationData.Current.LocalSettings.Values["CurrentAct"] = introBox.Text;
+                ApplicationData.Current.LocalSettings.Values["Description"] = description.Text;
                 introGrid.Visibility = Visibility.Collapsed;
                 mainPageGrid.Visibility = Visibility.Visible;
                 stuffToDoWhenNavigatedTo();
