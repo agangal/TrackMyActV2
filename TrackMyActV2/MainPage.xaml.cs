@@ -89,4 +89,27 @@ namespace TrackMyActV2
             rootFrame.Navigate(typeof(TimerPage));
         }
     }
+
+    public class BooleanToVisibilityConvertor : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if ((string)value == "")
+            {
+                return Visibility.Collapsed;
+            }
+            else if (value == null)
+            {
+                return Visibility.Collapsed;
+            }
+            return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
+
 }

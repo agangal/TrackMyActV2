@@ -14,7 +14,7 @@ namespace TrackMyActV2.Libraries
         private int countLimit;
         public Library()
         {
-            countLimit = 14;
+            countLimit = 300;
         }
         public async Task<bool> checkIfFileExists(string filename)
         {
@@ -29,6 +29,11 @@ namespace TrackMyActV2.Libraries
             }
         }
 
+        /// <summary>
+        /// Reads and returns a string containing the contents of file "filename"
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public async Task<string> readFile(string filename)
         {
             var applicationData = Windows.Storage.ApplicationData.Current;
@@ -47,6 +52,12 @@ namespace TrackMyActV2.Libraries
             return response;
         }
 
+        /// <summary>
+        /// Writes the "response" to the "filename" file.
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="response"></param>
+        /// <returns></returns>
         public async Task<bool> writeFile(string filename, string response)
         {
             var applicationData = Windows.Storage.ApplicationData.Current;
@@ -66,13 +77,13 @@ namespace TrackMyActV2.Libraries
             return true;
         }
 
-        private long findMedian(ActivityData ractivitydata)
-        {
-
-
-            return 0;
-        }
-
+        /// <summary>
+        /// It's not being used anymore. I divided up it's functionality and moved it to the TimerPage
+        /// </summary>
+        /// <param name="timerText"></param>
+        /// <param name="timerdata"></param>
+        /// <param name="activityName"></param>
+        /// <returns></returns>
         public async Task<bool> updateDB(string timerText, TimeSpan timerdata, string activityName)
         {
             bool res = await checkIfFileExists("activityDB");

@@ -42,7 +42,7 @@ namespace TrackMyActV2.Pages
         {
             this.InitializeComponent();
             library = new Library();
-            countLimit = 90;
+            countLimit = 300;
 
             //timerdata = "00:00:00";
         }
@@ -133,11 +133,7 @@ namespace TrackMyActV2.Pages
         }
         private void GoEllipse_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            activityName.Text = NewActivityName.Text;
-            ApplicationData.Current.LocalSettings.Values["CurrentAct"] = activityName.Text;
             activityName.Visibility = Visibility.Visible;
-            NewActivityName.Visibility = Visibility.Collapsed;
-
             startTimer();
         }
 
@@ -152,8 +148,7 @@ namespace TrackMyActV2.Pages
             activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
             ApplicationData.Current.LocalSettings.Values["CurrentAct"] = activityName.Text;
             activityName.Visibility = Visibility.Visible;            
-            NewActivityName.Visibility = Visibility.Collapsed;
-
+           
             startTimer();
         }
 
@@ -352,7 +347,6 @@ namespace TrackMyActV2.Pages
                 timerdata = subtract.Substring(0, 8);
                 TimerText.Text = timerdata;
                 Debug.WriteLine("Result of subtraction : " + timerdata);
-
             }
             catch (Exception ex)
             {
@@ -366,38 +360,7 @@ namespace TrackMyActV2.Pages
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(AllTheData), rtrackact);
         }        
-        private void cancelAddAct_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Cancel add act Button Pressed");
-            activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
-            GridOkAddNewAct.Visibility = Visibility.Collapsed;
-            personalBestGrid.Opacity = 100;
-            activityName.Visibility = Visibility.Visible;
-            NewActivityName.Visibility = Visibility.Collapsed;
-            StatisticsGrid.Opacity = 100;
-        }
-
-        private void newAct_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Cancel add act Button Pressed");
-            if (NewActivityName.Text == "")
-            {
-                NewActivityName.PlaceholderText = "This box cannot be left empty";
-            }
-            else
-            {
-                GoEllipse.IsTapEnabled = true;
-                GoTextBlock.IsTapEnabled = true;
-                ApplicationData.Current.LocalSettings.Values["CurrentAct"] = NewActivityName.Text;
-                activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
-                GridOkAddNewAct.Visibility = Visibility.Collapsed;
-                personalBestGrid.Opacity = 0;
-                activityName.Visibility = Visibility.Visible;
-                NewActivityName.Visibility = Visibility.Collapsed;
-                StatisticsGrid.Opacity = 0;
-            }
-        }
-
+        
         private void introGo_Click(object sender, RoutedEventArgs e)
         {
             if ((introBox.Text != ""))
