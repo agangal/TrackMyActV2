@@ -308,7 +308,7 @@
     </Page.Resources>
 
     <Grid>
-        <Grid x:Name="introGrid" Visibility="Visible" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid x:Name="introGrid" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel>
                 <TextBlock Grid.Row="0" Foreground="#f3f4f7"
                            Grid.Column="1" FontSize="17"
@@ -357,20 +357,13 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-
                     <TextBlock Text="Track My Act" Grid.Row="0"
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                FontSize="15"
                                FontFamily="Segoe UI"
                                Margin="10"
-                               Foreground="White"></TextBlock>
-                    <!-- <ComboBox Visibility="Visible" Grid.ColumnSpan="6" 
-                      FontSize="15" Width="300" Foreground="Black"
-                      HorizontalAlignment="Center" Margin="0,40,0,0" Height="20"
-                      VerticalAlignment="Center">
-                <ComboBoxItem Content="abc"></ComboBoxItem> 
-                </ComboBox> -->
+                               Foreground="White"></TextBlock>                   
                     <Button HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White">
                         <Button.Content>
                             <StackPanel Orientation="Vertical">
@@ -380,13 +373,6 @@
                         </Button.Content>
                     </Button>
                 </Grid>
-
-                <ComboBox x:Name="activityNameComboBox" Visibility="Collapsed" SelectionChanged="activityNameComboBox_SelectionChanged" Grid.Row="1" Grid.ColumnSpan="6" 
-                      FontSize="15" Width="300" Foreground="Black"
-                      HorizontalAlignment="Center" Margin="0,40,0,0"
-                      VerticalAlignment="Center">
-
-                </ComboBox>
 
                 <TextBox x:Name="NewActivityName" Visibility="Collapsed"
                      Grid.Row="1" Grid.ColumnSpan="6" FontSize="15" Width="300" TextAlignment="Center"
@@ -578,48 +564,33 @@
             <Grid Grid.Row="3" x:Name="NavigationButtons">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.2*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Border BorderBrush="White" BorderThickness="0,1,1,0">
                     <Button x:Name="Charts" Foreground="White" Height="45" Click="Charts_Click" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <TextBlock Text="&#xE162;" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"></TextBlock>
-                                <TextBlock Text="Charts" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+                                <TextBlock Text="&#xE162;" Foreground="#f3f4f7" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"></TextBlock>
+                                <TextBlock Text="Charts" Foreground="#f3f4f7" CharacterSpacing="40" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
                             </StackPanel>
                         </Button.Content>
                     </Button>
                 </Border>
-                <Border BorderBrush="White" BorderThickness="0,1,1,0" Grid.Column="1">
-                    <Button x:Name="RecycleButton" Click="RecycleButton_Click" Foreground="White" Height="45" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="1">
+                <Border BorderBrush="White" BorderThickness="0,1,0,0" Grid.Column="1">
+                    <Button Visibility="Visible" x:Name="RecycleButton" Click="RecycleButton_Click" Foreground="White" Height="45" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="1">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" 
-                                    Foreground="White"
-                                    VerticalAlignment="Center"
-                                    Text="&#xE117;"></TextBlock>
-                                <TextBlock Foreground="White" Margin="10,0,0,0" Text="Replace Act" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock FontFamily="Segoe MDL2 Assets"                                     Foreground="White"
+                                    VerticalAlignment="Center" Text="&#xE12A;"></TextBlock>
+                                <TextBlock Foreground="White" Margin="10,0,0,0"
+                                           Text="Activity Board" CharacterSpacing="40"
+                                           VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </Button.Content>
                     </Button>
-                </Border>
-                <Border BorderBrush="White" BorderThickness="0,1,0,0" Grid.Column="2">
-                    <Button Foreground="White" Height="45" FontSize="10" x:Name="AddNew" Click="AddNew_Click" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="2">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Foreground="White" VerticalAlignment="Center" Text="&#xE109;"></TextBlock>
-                                <TextBlock Foreground="White" Margin="10,0,0,0" Text="Add an Act" VerticalAlignment="Center"></TextBlock>
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
-                </Border>
-            </Grid>
-            <Grid Grid.Row="4" x:Name="CoverPage">
-                <Rectangle Fill="#3c385c" Visibility="Collapsed"></Rectangle>
-            </Grid>
-
+                </Border>                
+            </Grid>            
         </Grid>
-
     </Grid>
 </Page>

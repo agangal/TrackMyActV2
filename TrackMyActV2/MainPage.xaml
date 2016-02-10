@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <!--<Button Grid.Row="0" HorizontalAlignment="Center" IsEnabled="True"
                 Content="Chart" Name="ChartButton" Click="ChartButton_Click"></Button> -->
@@ -58,6 +59,17 @@
             </ListView.ItemTemplate>
 
         </ListView>
-        
+        <Grid Grid.Row="3" x:Name="NavigationButtons">            
+            <Border BorderBrush="#f3f4f7" BorderThickness="0,1,0,0">
+                <Button x:Name="addNewAct" Foreground="White" Height="45" Click="addNewAct_Click" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <TextBlock Text="&#xE109;" Foreground="#f3f4f7" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"></TextBlock>
+                            <TextBlock Text="Add a new Act" Foreground="#f3f4f7" CharacterSpacing="40" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Border>            
+        </Grid>
     </Grid>
 </Page>

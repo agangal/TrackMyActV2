@@ -104,6 +104,12 @@ namespace TrackMyActV2.Pages
                 mainPageGrid.Visibility = Visibility.Collapsed;
                 introGrid.Visibility = Visibility.Visible;
             }
+            else if((bool)ApplicationData.Current.LocalSettings.Values["NewActivity"] == true)
+            {
+                mainPageGrid.Visibility = Visibility.Collapsed;
+                introGrid.Visibility = Visibility.Visible;
+                ApplicationData.Current.LocalSettings.Values["NewActivity"] = false;
+            }
             else
             {
                 string actname = (string)e.Parameter;
@@ -130,7 +136,6 @@ namespace TrackMyActV2.Pages
             activityName.Text = NewActivityName.Text;
             ApplicationData.Current.LocalSettings.Values["CurrentAct"] = activityName.Text;
             activityName.Visibility = Visibility.Visible;
-            activityNameComboBox.Visibility = Visibility.Collapsed;
             NewActivityName.Visibility = Visibility.Collapsed;
 
             startTimer();
@@ -138,27 +143,15 @@ namespace TrackMyActV2.Pages
 
         private void RecycleButton_Click(object sender, RoutedEventArgs e)
         {
-            activityNameComboBox.Items.Clear();
-            activityNameComboBox.Visibility = Visibility.Visible;
-            for (int i = 0; i < rtrackact.activity.Count; i++)
-            {
-
-                ComboBoxItem cbitem = new ComboBoxItem();
-                cbitem.Content = rtrackact.activity[i].name;
-
-                activityNameComboBox.Items.Add(cbitem);
-            }
-            activityName.Visibility = Visibility.Collapsed;
-            NewActivityName.Visibility = Visibility.Collapsed;
-
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(MainPage));
         }
 
         private void GoTextBlock_Tapped(object sender, TappedRoutedEventArgs e)
         {
             activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
             ApplicationData.Current.LocalSettings.Values["CurrentAct"] = activityName.Text;
-            activityName.Visibility = Visibility.Visible;
-            activityNameComboBox.Visibility = Visibility.Collapsed;
+            activityName.Visibility = Visibility.Visible;            
             NewActivityName.Visibility = Visibility.Collapsed;
 
             startTimer();
@@ -372,48 +365,7 @@ namespace TrackMyActV2.Pages
             Debug.WriteLine("Charts clicked");
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(AllTheData), rtrackact);
-        }
-
-        private void AddNew_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Add New Button Pressed");
-            GoEllipse.IsTapEnabled = false;
-            GoTextBlock.IsTapEnabled = false;
-            GridOkAddNewAct.Visibility = Visibility.Visible;
-            personalBestGrid.Opacity = 0;
-            activityName.Visibility = Visibility.Collapsed;
-            activityNameComboBox.Visibility = Visibility.Collapsed;
-            NewActivityName.Visibility = Visibility.Visible;
-            //NewActivityName.Focus(FocusState);
-            StatisticsGrid.Opacity = 0;
-            //Frame rootFrame = Window.Current.Content as Frame;
-            //rootFrame.Navigate(typeof(AllTheData), rtrackact);
-
-        }
-
-        private void activityNameComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBoxItem cbt = (ComboBoxItem)activityNameComboBox.SelectedItem;
-            activityName.Text = cbt == null ? activityName.Text : (string)cbt.Content;
-            ApplicationData.Current.LocalSettings.Values["CurrentAct"] = activityName.Text;
-            for (int i = 0; i < rtrackact.activity.Count; i++)
-            {
-                if (rtrackact.activity[i].name == activityName.Text)
-                {
-                    personalBest.Text = rtrackact.activity[i].personal_best;
-                    personalBest.Visibility = Visibility.Visible;
-                    personalBestGrid.Opacity = 100;
-                    MedianTextBlock.Text = rtrackact.activity[i].median;
-                    NinetyPercentileTextBlock.Text = rtrackact.activity[i].ninetypercentile;
-                    break;
-                }
-            }
-
-            activityName.Visibility = Visibility.Visible;
-            activityNameComboBox.Visibility = Visibility.Collapsed;
-            NewActivityName.Visibility = Visibility.Collapsed;
-        }
-
+        }        
         private void cancelAddAct_Click(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Cancel add act Button Pressed");
@@ -421,7 +373,6 @@ namespace TrackMyActV2.Pages
             GridOkAddNewAct.Visibility = Visibility.Collapsed;
             personalBestGrid.Opacity = 100;
             activityName.Visibility = Visibility.Visible;
-            activityNameComboBox.Visibility = Visibility.Collapsed;
             NewActivityName.Visibility = Visibility.Collapsed;
             StatisticsGrid.Opacity = 100;
         }
@@ -442,7 +393,6 @@ namespace TrackMyActV2.Pages
                 GridOkAddNewAct.Visibility = Visibility.Collapsed;
                 personalBestGrid.Opacity = 0;
                 activityName.Visibility = Visibility.Visible;
-                activityNameComboBox.Visibility = Visibility.Collapsed;
                 NewActivityName.Visibility = Visibility.Collapsed;
                 StatisticsGrid.Opacity = 0;
             }

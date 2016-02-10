@@ -81,5 +81,12 @@ namespace TrackMyActV2
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(TimerPage), actd.name);
         }
+
+        private void addNewAct_Click(object sender, RoutedEventArgs e)
+        {
+            ApplicationData.Current.LocalSettings.Values["NewActivity"] = true;
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(TimerPage));
+        }
     }
 }
