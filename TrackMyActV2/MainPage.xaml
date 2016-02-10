@@ -5,22 +5,59 @@
     xmlns:local="using:TrackMyActV2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:TrackMyActV2.Models"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid>
-           
-                <!--<Grid>
-                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" Text="How-To Track Your Act" FontSize="20" Margin="20"></TextBlock>
-                    <Image Source="/Images/HitGo.png" Margin="50"></Image>
-                </Grid>
-                <Grid>
-                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" Text="How-To Track Your Act" FontSize="20" Margin="20"></TextBlock>
-                    <Image Source="/Images/SeeYourStats.png" Margin="50"></Image>
-                </Grid>-->
-                
+    <Grid x:Name="mainGrid" Visibility="Visible">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--<Button Grid.Row="0" HorizontalAlignment="Center" IsEnabled="True"
+                Content="Chart" Name="ChartButton" Click="ChartButton_Click"></Button> -->
+        <TextBlock Grid.Row="0" Margin="20,20,20,10" HorizontalAlignment="Left"
+                   Text="Activity Board" Foreground="White"
+                   TextAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>
+        <Border BorderBrush="White" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Bottom" BorderThickness="0,0,0,1"></Border>
 
-          
-        </Grid>
+        <ListView Name="dataListView"
+                  ItemClick="dataListView_ItemClick"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  ItemsSource="{x:Bind activity}"
+                  IsItemClickEnabled="True"
+                  Grid.Row="1">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:ActivityData">
+                    <StackPanel Orientation="Vertical" Margin="0,5,5,0" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,0">
+                                <Image Source="/Images/pointerIcon.png" HorizontalAlignment="Left" Height="12" Width="12"></Image>
+                                <TextBlock Text="{x:Bind name}" Margin="10,5,2,10" Foreground="White" FontSize="16"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                            <TextBlock Text="&#xE00F;" FontSize="10"  FontFamily="Segoe MDL2 Assets" Foreground="#f3f4f7" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                        </Grid>
+                        <TextBlock Text="{x:Bind description}" Margin="23,2,5,10" Foreground="#f3f4f7" FontSize="12"></TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="23,2,5,10">
+                            <TextBlock Text="You have spent " Foreground="#f3f4f7" FontSize="12"></TextBlock>
+                            <TextBlock Text="{x:Bind totalTime}" TextWrapping="WrapWholeWords" Margin="5,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
+                            <TextBlock Text=" seconds on this activity" TextWrapping="WrapWholeWords" Margin="3,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
+
+                        </StackPanel>
+                        <Border BorderBrush="#625F80" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="0" BorderThickness="0,0,0,1"></Border>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        
     </Grid>
 </Page>

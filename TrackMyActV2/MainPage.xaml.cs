@@ -75,6 +75,11 @@ namespace TrackMyActV2
             }
         }
 
-        
+        private void dataListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ActivityData actd = (ActivityData)e.ClickedItem;
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(TimerPage), actd.name);
+        }
     }
 }
