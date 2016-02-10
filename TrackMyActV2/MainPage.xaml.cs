@@ -79,7 +79,8 @@ namespace TrackMyActV2
         {
             ActivityData actd = (ActivityData)e.ClickedItem;
             Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(TimerPage), actd.name);
+            ApplicationData.Current.LocalSettings.Values["NewActivity"] = false;
+            rootFrame.Navigate(typeof(TimerPage), actd.name);            
         }
 
         private void addNewAct_Click(object sender, RoutedEventArgs e)

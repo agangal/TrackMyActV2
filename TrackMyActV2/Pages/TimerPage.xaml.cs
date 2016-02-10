@@ -345,6 +345,15 @@ namespace TrackMyActV2.Pages
                 timerdata_TimeSpan = DateTime.Now.Subtract(startTime);
                 string subtract = (DateTime.Now.Subtract(startTime)).ToString();
                 timerdata = subtract.Substring(0, 8);
+                //if (subtract.Substring(0, 2) == "00")
+                //{
+                //    timerdata = subtract.Substring(3, 5);
+                //    TimerText.Text = timerdata;
+                //}
+                //else
+                //{
+                //    TimerText.Text = timerdata;
+                //}
                 TimerText.Text = timerdata;
                 Debug.WriteLine("Result of subtraction : " + timerdata);
             }
@@ -358,7 +367,7 @@ namespace TrackMyActV2.Pages
         {
             Debug.WriteLine("Charts clicked");
             Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(AllTheData), rtrackact);
+            rootFrame.Navigate(typeof(Charts), rtrackact);
         }        
         
         private void introGo_Click(object sender, RoutedEventArgs e)

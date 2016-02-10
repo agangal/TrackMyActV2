@@ -310,18 +310,24 @@
     <Grid>
         <Grid x:Name="introGrid" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel>
-                <TextBlock Grid.Row="0" Foreground="#f3f4f7"
-                           Grid.Column="1" FontSize="17"
+                <TextBlock Text="Track My Act" HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" FontWeight="Light"
+                               FontSize="15" CharacterSpacing="80"
+                               FontFamily="Segoe UI"
+                               Margin="20"
+                               Foreground="White"></TextBlock>
+                <TextBlock Foreground="#f3f4f7"
+                           FontSize="17"
                            HorizontalAlignment="Center" 
                            TextAlignment="Center" Margin="30,30,30,30"
                            TextWrapping="WrapWholeWords"
                            VerticalAlignment="Top" 
                            Text="What do you want to track?"></TextBlock>
-                <TextBlock Text="Activity" FontSize="10" VerticalAlignment="Center" Foreground="#f3f4f7" Margin="30,20,30,0"></TextBlock>
+                <TextBlock Text="Activity" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#f3f4f7" Margin="30,20,30,0"></TextBlock>
                 <TextBox Name="introBox" Width="300" Margin="30,10,30,30" 
                          HorizontalAlignment="Center" 
                          VerticalAlignment="Center"></TextBox>
-                <TextBlock Text="Description" FontSize="10" Foreground="#f3f4f7" VerticalAlignment="Center" Margin="30,20,30,0"></TextBlock>
+                <TextBlock Text="Description (Optional)" HorizontalAlignment="Center" FontSize="10" Foreground="#f3f4f7" VerticalAlignment="Center" Margin="30,20,30,0"></TextBlock>
                 <TextBox Name="description" Width="300" Margin="30,10,30,30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
                 <Button Grid.Row="2" 
                         Foreground="White"
@@ -359,8 +365,8 @@
                 <Grid Grid.Row="0">
                     <TextBlock Text="Track My Act" Grid.Row="0"
                                HorizontalAlignment="Center" 
-                               VerticalAlignment="Center"
-                               FontSize="15" CharacterSpacing="40"
+                               VerticalAlignment="Center" FontWeight="Light"
+                               FontSize="15" CharacterSpacing="80"
                                FontFamily="Segoe UI"
                                Margin="10"
                                Foreground="White"></TextBlock>
@@ -527,12 +533,12 @@
 
             <Grid Grid.Row="3" x:Name="NavigationButtons">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    
                 </Grid.ColumnDefinitions>
-                <Border BorderBrush="White" BorderThickness="0,1,1,0">
-                    <Button x:Name="Charts" Foreground="White" Height="45" Click="Charts_Click" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
+                <Border BorderBrush="White" BorderThickness="0,1,1,0" Visibility="Collapsed">
+                    <Button x:Name="Charts" Foreground="White" Height="45" Click="Charts_Click" Visibility="Collapsed" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <TextBlock Text="&#xE162;" Foreground="#f3f4f7" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"></TextBlock>

@@ -21,14 +21,15 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Track My Act" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   FontSize="15" FontFamily="Segoe UI" Margin="10" CharacterSpacing="40" Foreground="White"></TextBlock>
+                   FontSize="15" FontFamily="Segoe UI" Margin="10" CharacterSpacing="80" Foreground="White"></TextBlock>
         <!--<Button Grid.Row="0" HorizontalAlignment="Center" IsEnabled="True"
                 Content="Chart" Name="ChartButton" Click="ChartButton_Click"></Button> -->
-        <TextBlock Grid.Row="1" Margin="20,20,20,10" HorizontalAlignment="Left"
-                   Text="Activity Board" Foreground="White"
-                   TextAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>
         <Border BorderBrush="White" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Bottom" BorderThickness="0,0,0,1"></Border>
 
+        <TextBlock Grid.Row="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Text="Activity Board" Foreground="White" CharacterSpacing="60"
+                   TextAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>
+        <Border BorderBrush="White" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Bottom" BorderThickness="0,0,0,1"></Border>
         <ListView Name="dataListView"
                   ItemClick="dataListView_ItemClick"
                   HorizontalAlignment="Stretch"
