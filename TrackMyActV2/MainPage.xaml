@@ -39,9 +39,10 @@
                   ItemClick="dataListView_ItemClick"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
-                  IsSwipeEnabled="True"
+                  IsSwipeEnabled="True"                  
                   CanReorderItems="True" CanDrag="True" AllowDrop="True"
                   ItemsSource="{x:Bind activity}"
+                  DropCompleted="dataListView_DropCompleted"
                   IsItemClickEnabled="True"
                   Grid.Row="2">
             <ListView.ItemContainerStyle>

@@ -17,6 +17,7 @@ using Windows.Storage;
 using TrackMyActV2.Libraries;
 using TrackMyActV2.Models;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace TrackMyActV2
@@ -36,8 +37,15 @@ namespace TrackMyActV2
             library = new Library();
             activity = new ObservableCollection<ActivityData>();
             tmdata = new ObservableCollection<TimerData>();
+            tmdata.CollectionChanged += Tmdata_CollectionChanged;
             rtrackact = new RootObjectTrackAct();
+            dataListView.ReorderMode = ListViewReorderMode.Enabled;
             Loaded += MainPage_Loaded;
+        }
+
+        private void Tmdata_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            Debug.WriteLine("tmdata collectionchanged");            
         }
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -64,6 +72,7 @@ namespace TrackMyActV2
                     {
                         tmdata.Add(tdata);
                     }
+                   
                 }
                 else
                 {
@@ -88,6 +97,11 @@ namespace TrackMyActV2
             ApplicationData.Current.LocalSettings.Values["NewActivity"] = true;
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(TimerPage));
+        }
+
+        private void dataListView_DropCompleted(UIElement sender, DropCompletedEventArgs args)
+        {
+            Debug.WriteLine("Drop Completed");
         }
     }
 

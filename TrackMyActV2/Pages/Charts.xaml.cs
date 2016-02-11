@@ -5,10 +5,12 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -47,6 +49,7 @@ namespace TrackMyActV2.Pages
             //    new KeyValuePair<int, DateTime>(2, DateTime.Today.AddSeconds(50)),
             //    new KeyValuePair<int, DateTime>(3, DateTime.Today.AddSeconds(30))
             //};
+            rtb.Blocks.Add(ContentForRichTextBox("9910918444"));
             List<temp> templist = new List<temp>();
             templist.Add(new temp() { seconds = DateTime.Today.AddSeconds(20), count = 1 });
             templist.Add(new temp() { seconds = DateTime.Today.AddSeconds(10), count = 2 });
@@ -59,6 +62,44 @@ namespace TrackMyActV2.Pages
             axis.Interval = 5;
             axis.IntervalType = DateTimeIntervalType.Seconds;
         }
-           
+
+        public Paragraph ContentForRichTextBox(string plainString)
+        {
+            Paragraph richContent = new Paragraph();
+            try
+            {
+                string[] plainStringSplit = plainString.Split(' ');
+                foreach (var word in plainStringSplit)
+                {
+                    var number = new Hyperlink();
+                    number.Foreground = new SolidColorBrush(Colors.DarkBlue);
+                    number.Inlines.Add(new Run { Text = word });
+                    number.Click += (s, e) =>
+                    {
+                        try
+                        {
+                            Windows.ApplicationModel.Calls.PhoneCallManager.ShowPhoneCallUI(word, "Some dude");
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Exception HelperMethod   number.Click : " + ex.ToString());
+                        }
+                    };
+                    richContent.Inlines.Add(number);
+
+                    //add a space
+                    if (plainStringSplit.Last() != word)
+                    {
+                        richContent.Inlines.Add(new Run { Text = " " });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception HelperMethod ContentForRichTextBox : " + ex.ToString());
+            }
+            return richContent;
+        }
+
     }
 }

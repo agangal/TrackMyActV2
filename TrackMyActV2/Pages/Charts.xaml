@@ -22,7 +22,11 @@
                 </charting:DateTimeAxis>
             </charting:Chart.Axes>
         </charting:Chart>
+        <StackPanel>
+            <RichTextBlock FontSize="40" x:Name="rtb"/>
+            <TextBox x:Name="tb"/>
+        </StackPanel>
 
-       
+
     </Grid>
 </Page>
