@@ -18,6 +18,7 @@ using TrackMyActV2.Libraries;
 using TrackMyActV2.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Collections;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace TrackMyActV2
@@ -30,6 +31,7 @@ namespace TrackMyActV2
         private Library library;
         public ObservableCollection<ActivityData> activity { get; set; }
         public ObservableCollection<TimerData> tmdata { get; set; }
+        public Hashtable activityPos { get; set; }
         private RootObjectTrackAct rtrackact;
         public MainPage()
         {
@@ -39,6 +41,7 @@ namespace TrackMyActV2
             tmdata = new ObservableCollection<TimerData>();
             tmdata.CollectionChanged += Tmdata_CollectionChanged;
             rtrackact = new RootObjectTrackAct();
+            activityPos = new Hashtable();
             dataListView.ReorderMode = ListViewReorderMode.Enabled;
             Loaded += MainPage_Loaded;
         }
@@ -50,6 +53,10 @@ namespace TrackMyActV2
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            tmdata.Clear();
+            activity.Clear();
+            activityPos.Clear();
+            //dataListView.ManipulationDelta += DataListView_ManipulationDelta;
             if (ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)
             {
                 Frame rootFrame = Window.Current.Content as Frame;
@@ -63,9 +70,15 @@ namespace TrackMyActV2
                     string fileres = await library.readFile("activityDB");
                     rtrackact = TrackAct.trackactDataDeserializer(fileres);
                     var activityD = rtrackact.activity;
+                    int i=0;
                     foreach (var actv in activityD)
                     {
-                        activity.Add(actv);
+                        if (actv.isDelete == false)
+                        {
+                            activity.Add(actv);
+                            activityPos.Add(actv.name, i);
+                            i++;
+                        }
                     }
                     var timedata = rtrackact.activity[0].timer_data;
                     foreach (var tdata in timedata)
@@ -84,6 +97,11 @@ namespace TrackMyActV2
             }
         }
 
+        //private void DataListView_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        //{
+        //    Debug.WriteLine("Manipulation Delta Event in C# generated event");
+        //}
+
         private void dataListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             ActivityData actd = (ActivityData)e.ClickedItem;
@@ -99,10 +117,31 @@ namespace TrackMyActV2
             rootFrame.Navigate(typeof(TimerPage));
         }
 
-        private void dataListView_DropCompleted(UIElement sender, DropCompletedEventArgs args)
+        private void deleteItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Debug.WriteLine("Drop Completed");
+            int pos = -1;
+            Debug.WriteLine("In Delete Item");
+            Button bt = sender as Button;
+            ActivityData actd = (ActivityData)bt.DataContext;
+            pos = (int)activityPos[actd.name];
+            rtrackact.activity[pos].isDelete = true;
+            Debug.WriteLine("In Delete Item");
         }
+
+        //private void dataListView_DropCompleted(UIElement sender, DropCompletedEventArgs args)
+        //{
+        //    Debug.WriteLine("Drop Completed");
+        //}
+
+        //private void dataListView_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        //{
+        //    Debug.WriteLine("Manipulation Delta Event");
+        //}
+
+        //private void StackPanel_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        //{
+        //    Debug.WriteLine("Stack Panel Manipulation Delta");
+        //}
     }
 
     public class BooleanToVisibilityConvertor : IValueConverter

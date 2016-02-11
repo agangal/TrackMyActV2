@@ -122,14 +122,11 @@ namespace TrackMyActV2.Pages
 
         private void firstLaunch()
         {
-            //ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = true;  
+            
             StatisticsGrid.Opacity = 0;
             personalBestGrid.Opacity = 0;
-            //ApplicationData.Current.LocalSettings.Values["CurrentAct"] = "In Private Mode";
             activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
-            /* ButtonAutomationPeer peer = new ButtonAutomationPeer(AddNew);
-             IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
-             invokeProv.Invoke();*/
+           
         }
         private void GoEllipse_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -201,6 +198,7 @@ namespace TrackMyActV2.Pages
                     ractivitydata.name = activityName.Text;
                     ractivitydata.createdTime = DateTime.UtcNow;
                     ractivitydata.totalTime = 0;
+                    ractivitydata.isDelete = false;                    
                     TimerData tdata = new TimerData();
                     tdata.position = 0;             // Since this is a new activity, it won't have any data already associated with it.
                     tdata.time_in_seconds = (long)timerdata_TimeSpan.TotalSeconds;
@@ -249,6 +247,7 @@ namespace TrackMyActV2.Pages
                     ractivitydata.name = activityName.Text;
                     ractivitydata.createdTime = DateTime.UtcNow;
                     ractivitydata.totalTime = 0;
+                    ractivitydata.isDelete = false;
                     ractivitydata.description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
                     TimerData tdata = new TimerData();
                     //tdata.position = 0;             // Since this is a new activity, it won't have any data already associated with it.
@@ -301,6 +300,7 @@ namespace TrackMyActV2.Pages
                     long personal_best = (time_in_seconds.ElementAtOrDefault(time_in_seconds.Count - 1));
                     rtrackact.activity[activity_pos].personal_best = String.Format("{0:00}:{1:00}:{2:00}", (personal_best) / 3600, ((personal_best) / 60) % 60, (personal_best) % 60);
                     rtrackact.activity[activity_pos].timer_data.Add(tdata);
+                    rtrackact.activity[activity_pos].isDelete = false;
                     personalBest.Text = rtrackact.activity[activity_pos].personal_best;
                     personalBestGrid.Opacity = 100;
                     MedianTextBlock.Text = rtrackact.activity[activity_pos].median;

@@ -39,11 +39,10 @@
                   ItemClick="dataListView_ItemClick"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
-                  IsSwipeEnabled="True"                  
-                  CanReorderItems="True" CanDrag="True" AllowDrop="True"
+                  IsSwipeEnabled="True"                    
                   ItemsSource="{x:Bind activity}"
-                  DropCompleted="dataListView_DropCompleted"
-                  IsItemClickEnabled="True"
+                  
+                  IsItemClickEnabled="True"                  
                   Grid.Row="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -51,6 +50,7 @@
                     
                 </Style>
             </ListView.ItemContainerStyle>
+            
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:ActivityData">
                     <StackPanel Orientation="Vertical" Margin="0,5,5,0" HorizontalAlignment="Stretch">
@@ -60,7 +60,8 @@
                                 <TextBlock Text="{x:Bind name}" Margin="10,5,2,10" Foreground="White" FontSize="16"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
-                            <TextBlock Text="&#xE00F;" FontSize="10"  FontFamily="Segoe MDL2 Assets" Foreground="#f3f4f7" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                            <TextBlock Text="&#xE00F;" FontSize="10" Margin="10,10,40,10" FontFamily="Segoe MDL2 Assets" Foreground="#f3f4f7" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                            <Button Content="&#xE107;" x:Name="deleteItem" FontSize="10" FontFamily="Segoe MDL2 Assets" Foreground="#f3f4f7" Tapped="deleteItem_Tapped" VerticalAlignment="Center" HorizontalAlignment="Right"></Button>
                         </Grid>
                         <TextBlock Text="{x:Bind description}" Margin="23,2,5,10" Visibility="{x:Bind description, Converter={StaticResource visibilityConver}}"
                                    Foreground="#f3f4f7" FontSize="12"></TextBlock>

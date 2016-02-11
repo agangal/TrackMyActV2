@@ -61,6 +61,10 @@ namespace TrackMyActV2.Models
         [DataMember]
         public string description { get; set; }
         [DataMember]
+        public bool isDelete { get; set; }
+        [DataMember]
+        public bool isSelected { get; set; }
+        [DataMember]
         public List<TimerData> timer_data { get; set; }
     }
 
@@ -69,6 +73,8 @@ namespace TrackMyActV2.Models
     {
         [DataMember]
         public List<ActivityData> activity { get; set; }
+        [DataMember]
+        public long activitySelectedPos { get; set; }
     }
 
 
