@@ -25,8 +25,7 @@ namespace TrackMyActV2.Models
     public class timerToChartsTransfer
     {
         public long activity_pos;
-        public RootObjectTrackAct trackact;
-        public ActivityData activitydata;
+        public RootObjectTrackAct trackact;       
     }
     [DataContract]
     public class TimerData
