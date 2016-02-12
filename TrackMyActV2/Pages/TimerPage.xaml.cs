@@ -29,7 +29,7 @@ namespace TrackMyActV2.Pages
     {
         private DateTime startTime;
         private string timerdata;
-        
+        private int activity_pos;
         private TimeSpan timerdata_TimeSpan;
         //private DispatcherTimer _timer;
         private DispatcherTimer timer;
@@ -44,14 +44,14 @@ namespace TrackMyActV2.Pages
             this.InitializeComponent();
             library = new Library();
             countLimit = 300;
-          
+            activity_pos = -1;
             //timerdata = "00:00:00";
         }
 
 
         private async void stuffToDoWhenNavigatedTo()
         {
-
+            
             //activity_d = new ObservableCollection<ActivityData>();
             bool res = await library.checkIfFileExists("activityDB");
             rtrackact = new RootObjectTrackAct();
@@ -70,7 +70,7 @@ namespace TrackMyActV2.Pages
                     activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
                     rtrackact = TrackAct.trackactDataDeserializer(restring);
                     Debug.WriteLine("Not the first Launch");
-                    int activity_pos = -1;
+                    
                     for (int i = 0; i < rtrackact.activity.Count; i++)
                     {
                         if (rtrackact.activity[i].name == activityName.Text)
@@ -83,6 +83,7 @@ namespace TrackMyActV2.Pages
                     {
                         StatisticsGrid.Opacity = 0;
                         personalBestGrid.Opacity = 0;
+                        
                     }
                     else
                     {
@@ -97,6 +98,8 @@ namespace TrackMyActV2.Pages
                 firstLaunch();
             }
         }
+
+        /***TimerPage Entry Points ***/
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -120,6 +123,23 @@ namespace TrackMyActV2.Pages
                 stuffToDoWhenNavigatedTo();
             }
         }
+
+        private void introGo_Click(object sender, RoutedEventArgs e)
+        {
+            if ((introBox.Text != ""))
+            {
+                ApplicationData.Current.LocalSettings.Values["CurrentAct"] = introBox.Text;
+                ApplicationData.Current.LocalSettings.Values["Description"] = description.Text;
+                introGrid.Visibility = Visibility.Collapsed;
+                mainPageGrid.Visibility = Visibility.Visible;
+                stuffToDoWhenNavigatedTo();
+            }
+            else
+            {
+                introBox.PlaceholderText = "This box cannot be left empty.";
+            }
+        }
+        /***TimerPage Entry points over***/
 
         private void firstLaunch()
         {
@@ -223,6 +243,7 @@ namespace TrackMyActV2.Pages
                     StatisticsGrid.Opacity = 100;
                     ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
                     activity_d.Add(ractivitydata);
+                    activity_pos = 0;
                 }
                 catch (Exception ex)
                 {
@@ -232,15 +253,7 @@ namespace TrackMyActV2.Pages
             else
             {
 
-                int activity_pos = -1;
-                for (int i = 0; i < rtrackact.activity.Count; i++)
-                {
-                    if (rtrackact.activity[i].name == activityName.Text)
-                    {
-                        activity_pos = i;
-                    }
-
-                }
+                
                 if (activity_pos == -1)
                 {
                     Debug.Write("In RefreshUI. Activity doesn't exist");
@@ -269,7 +282,7 @@ namespace TrackMyActV2.Pages
                     MedianTextBlock.Text = ractivitydata.median;
                     NinetyPercentileTextBlock.Text = ractivitydata.ninetypercentile;
                     StatisticsGrid.Opacity = 100;
-
+                    activity_pos = 0;
                 }
                 else
                 {
@@ -367,25 +380,14 @@ namespace TrackMyActV2.Pages
         private void Charts_Click(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Charts clicked");
+            timerToChartsTransfer transfer = new timerToChartsTransfer();
+            
+            transfer.activity_pos = activity_pos;
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(Charts), rtrackact);
         }        
         
-        private void introGo_Click(object sender, RoutedEventArgs e)
-        {
-            if ((introBox.Text != ""))
-            {
-                ApplicationData.Current.LocalSettings.Values["CurrentAct"] = introBox.Text;
-                ApplicationData.Current.LocalSettings.Values["Description"] = description.Text;
-                introGrid.Visibility = Visibility.Collapsed;
-                mainPageGrid.Visibility = Visibility.Visible;
-                stuffToDoWhenNavigatedTo();
-            }
-            else
-            {
-                introBox.PlaceholderText = "This box cannot be left empty.";
-            }
-        }
+        
 
     }
 }
