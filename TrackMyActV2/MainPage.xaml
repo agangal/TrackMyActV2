@@ -25,8 +25,8 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Track My Act" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   FontSize="15" FontFamily="Segoe UI" Margin="10" CharacterSpacing="80" Foreground="White"></TextBlock>
+        <TextBlock Text="SECONDS" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold"
+                   FontSize="20" FontFamily="Segoe UI" Margin="10" CharacterSpacing="200" Foreground="White"></TextBlock>
         <!--<Button Grid.Row="0" HorizontalAlignment="Center" IsEnabled="True"
                 Content="Chart" Name="ChartButton" Click="ChartButton_Click"></Button> -->
         <Border BorderBrush="White" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Bottom" BorderThickness="0,0,0,1"></Border>

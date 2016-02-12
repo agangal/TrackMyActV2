@@ -315,9 +315,9 @@
     <Grid>
         <Grid x:Name="introGrid" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel>
-                <TextBlock Text="Track My Act" HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" FontWeight="Light"
-                               FontSize="15" CharacterSpacing="80"
+                <TextBlock Text="SECONDS" HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" FontWeight="SemiBold"
+                               FontSize="20" CharacterSpacing="200"
                                FontFamily="Segoe UI"
                                Margin="20"
                                Foreground="White"></TextBlock>
@@ -368,10 +368,10 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Track My Act" Grid.Row="0"
+                    <TextBlock Text="SECONDS" Grid.Row="0"
                                HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" FontWeight="Light"
-                               FontSize="15" CharacterSpacing="80"
+                               VerticalAlignment="Center" FontWeight="SemiBold"
+                               FontSize="20" CharacterSpacing="200"
                                FontFamily="Segoe UI"
                                Margin="10"
                                Foreground="White"></TextBlock>
@@ -538,12 +538,12 @@
 
             <Grid Grid.Row="3" x:Name="NavigationButtons">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     
                 </Grid.ColumnDefinitions>
-                <Border BorderBrush="White" BorderThickness="0,1,1,0" Visibility="Visible">
-                    <Button x:Name="Charts" Foreground="White" Height="45" Click="Charts_Click" Visibility="Visible" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
+                <Border BorderBrush="White" BorderThickness="0,1,1,0" Visibility="Collapsed">
+                    <Button x:Name="Charts" Foreground="White" Height="45" Click="Charts_Click" Visibility="Collapsed" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <TextBlock Text="&#xE162;" Foreground="#f3f4f7" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"></TextBlock>

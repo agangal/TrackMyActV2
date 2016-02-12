@@ -61,9 +61,7 @@ namespace TrackMyActV2.Pages
             axis.Maximum = DateTime.Today.AddSeconds(100);
             axis.Interval = 5;
             axis.IntervalType = DateTimeIntervalType.Seconds;
-        }
-
-        
+        }        
 
     }
 }
