@@ -61,7 +61,7 @@ namespace TrackMyActV2.Pages
             
         }
         /// <summary>
-         /// Code taken from : https://social.msdn.microsoft.com/Forums/en-US/e5a7955c-0a14-4ec8-99cb-b2dfe178cf4b/charting-datetimeaxis-range?forum=silverlightcontrols
+         ///
          /// </summary>
          /// <param name="sender"></param>
          /// <param name="e"></param>
