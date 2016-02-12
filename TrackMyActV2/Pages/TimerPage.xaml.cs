@@ -29,6 +29,7 @@ namespace TrackMyActV2.Pages
     {
         private DateTime startTime;
         private string timerdata;
+        
         private TimeSpan timerdata_TimeSpan;
         //private DispatcherTimer _timer;
         private DispatcherTimer timer;
@@ -43,7 +44,7 @@ namespace TrackMyActV2.Pages
             this.InitializeComponent();
             library = new Library();
             countLimit = 300;
-
+          
             //timerdata = "00:00:00";
         }
 
