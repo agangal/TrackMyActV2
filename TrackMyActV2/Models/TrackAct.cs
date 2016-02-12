@@ -22,11 +22,11 @@ namespace TrackMyActV2.Models
             return response;
         }
     }
-    public class formatTimeData
+    public class timerToChartsTransfer
     {
-        public long pos;
-        public string time_in_string;
-        public string datetime;
+        public long activity_pos;
+        public RootObjectTrackAct trackact;
+        public ActivityData activitydata;
     }
     [DataContract]
     public class TimerData
