@@ -78,6 +78,20 @@ namespace TrackMyActV2.Libraries
         }
 
         /// <summary>
+        /// Method to delete a file with name "filename"
+        /// </summary>
+        /// <param name="filename"></param>
+        public async void deleteFile(string filename)
+        {
+            Library library = new Library();
+            if (await library.checkIfFileExists(filename))
+            {
+                StorageFile sampleFile = await ApplicationData.Current.LocalFolder.GetFileAsync(filename);
+                await sampleFile.DeleteAsync(StorageDeleteOption.Default);
+            }
+        }
+
+        /// <summary>
         /// It's not being used anymore. I divided up it's functionality and moved it to the TimerPage
         /// </summary>
         /// <param name="timerText"></param>
