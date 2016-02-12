@@ -69,23 +69,7 @@ namespace TrackMyActV2
                     ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
                     string fileres = await library.readFile("activityDB");
                     rtrackact = TrackAct.trackactDataDeserializer(fileres);
-                    var activityD = rtrackact.activity;
-                    int i=0;
-                    foreach (var actv in activityD)
-                    {
-                        if (actv.isDelete == false)
-                        {
-                            activity.Add(actv);
-                            activityPos.Add(actv.name, i);
-                            i++;
-                        }
-                    }
-                    var timedata = rtrackact.activity[0].timer_data;
-                    foreach (var tdata in timedata)
-                    {
-                        tmdata.Add(tdata);
-                    }
-                   
+                    updateUI(rtrackact);                   
                 }
                 else
                 {
@@ -117,7 +101,7 @@ namespace TrackMyActV2
             rootFrame.Navigate(typeof(TimerPage));
         }
 
-        private void deleteItem_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void deleteItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             int pos = -1;
             Debug.WriteLine("In Delete Item");
@@ -126,8 +110,46 @@ namespace TrackMyActV2
             pos = (int)activityPos[actd.name];
             rtrackact.activity[pos].isDelete = true;
             Debug.WriteLine("In Delete Item");
+            tmdata.Clear();
+            activity.Clear();
+            activityPos.Clear();
+            updateUI(rtrackact);
+            rtrackact.activity.RemoveAt(pos);
+            if(rtrackact.activity.Count > 0)
+            {               
+                string res = TrackAct.trackactSerializer(rtrackact);
+                await library.writeFile("activityDB", res);
+            }
+            else
+            {
+                ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = null;
+                library.deleteFile("activityDB");
+                Frame rootFrame = Window.Current.Content as Frame;
+                rootFrame.Navigate(typeof(TimerPage));
+            }
+                    
         }
 
+        private  void updateUI(RootObjectTrackAct rtact)
+        {
+            
+            var activityD = rtact.activity;
+            int i = 0;
+            foreach (var actv in activityD)
+            {
+                if (actv.isDelete == false)
+                {
+                    activity.Add(actv);
+                    activityPos.Add(actv.name, i);
+                    i++;
+                }
+            }
+            var timedata = rtrackact.activity[0].timer_data;
+            foreach (var tdata in timedata)
+            {
+                tmdata.Add(tdata);
+            }
+        }
         //private void dataListView_DropCompleted(UIElement sender, DropCompletedEventArgs args)
         //{
         //    Debug.WriteLine("Drop Completed");
