@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-
 namespace TrackMyActV2.Models
 {
     public class TrackAct
