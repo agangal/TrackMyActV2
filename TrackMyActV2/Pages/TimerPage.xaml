@@ -489,18 +489,13 @@
                 <Border x:Name="border1" Grid.Row="1" Grid.ColumnSpan="2"  Grid.Column="1"
                         VerticalAlignment="Bottom" BorderBrush="#625F80"
                         BorderThickness="0,0,0,1"></Border>
-                <TextBlock x:Name="previousAttemptblock" Grid.Row="2" Grid.Column="1"
-                       HorizontalAlignment="Stretch"
-                       Margin="15"
-                       TextAlignment="Center" 
-                       TextWrapping="WrapWholeWords"
-                       Foreground="White" FontSize="18"
-                       Text="Last time"></TextBlock>
-                <TextBlock x:Name="previousAttempt" Grid.Row="2" Grid.Column="2"
-                       HorizontalAlignment="Center" 
-                       Margin="15"
-                       TextAlignment="Center" TextWrapping="WrapWholeWords"
-                       Foreground="White" FontSize="18"/>
+                
+                <TextBlock x:Name="previousAttempt" Grid.Row="2" Grid.Column="0"
+                           Grid.ColumnSpan="4" TextWrapping="WrapWholeWords"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center" 
+                           Margin="15"
+                           Foreground="White" FontSize="18"/>
                 <Border x:Name="border3" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1"
                         VerticalAlignment="Bottom" BorderBrush="#625F80"
                         BorderThickness="0,0,0,1" ></Border>

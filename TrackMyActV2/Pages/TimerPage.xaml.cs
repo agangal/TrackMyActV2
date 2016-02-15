@@ -92,10 +92,14 @@ namespace TrackMyActV2.Pages
                     }
                     else
                     {
-                        MedianTextBlock.Text = rtrackact.activity[activity_pos].median;
-                        NinetyPercentileTextBlock.Text = rtrackact.activity[activity_pos].ninetypercentile;
+                        MedianTextBlock.Text = library.convertSecondsToString(rtrackact.activity[activity_pos].median_in_sec);
+                        NinetyPercentileTextBlock.Text = library.convertSecondsToString(rtrackact.activity[activity_pos].ninetypercentile_second);
                         personalBest.Text = rtrackact.activity[activity_pos].personal_best;
                         NavigationButtons.Visibility = Visibility.Visible;
+                        TimerData td = new TimerData();
+                        td = rtrackact.activity[activity_pos].timer_data.Last();
+                        //previousAttemptblock.Text = "Last time you spent";
+                        previousAttempt.Text = "Last time you spent " + library.convertSecondsToString((long)td.time_in_seconds); //String.Format("{0:00}:{1:00}:{2:00}", (long)td.time_in_seconds / 3600, ((long)td.time_in_seconds / 60) % 60, (long)td.time_in_seconds % 60);
                         NavigationButtons_secondary.Visibility = Visibility.Collapsed;
 
                     }
@@ -249,14 +253,18 @@ namespace TrackMyActV2.Pages
                     ractivitydata.totalTime = ractivitydata.totalTime + tdata.time_in_seconds;
                     tdata.startTime = timerstartTime;
                     tdata.endTime = timerendTime;
-                    ractivitydata.lastattempt = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    tdata.running_personalBest = tdata.time_in_seconds;
+                    tdata.running_median = tdata.time_in_seconds;
+                    ractivitydata.median_in_sec = tdata.time_in_seconds;
+                    ractivitydata.lastattempt = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
                     //lastTime.Text = ractivitydata.lastattempt;
                     ractivitydata.timer_data = new List<TimerData>();
                     ractivitydata.timer_data.Add(tdata);
                     ractivitydata.description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
-                    ractivitydata.personal_best = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
-                    ractivitydata.median = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
-                    ractivitydata.ninetypercentile = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.personal_best = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.median = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.ninetypercentile = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds); //String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.ninetypercentile_second = (long)timerdata_TimeSpan.TotalSeconds;
                     rtrackact.activity = new List<ActivityData>();
                     rtrackact.activity.Add(ractivitydata);
                     personalBest.Text = ractivitydata.personal_best;
@@ -264,6 +272,8 @@ namespace TrackMyActV2.Pages
                     MedianTextBlock.Text = ractivitydata.median;
                     NinetyPercentileTextBlock.Text = ractivitydata.ninetypercentile;
                     StatisticsGrid.Opacity = 100;
+                    previousAttempt.Text = "This time you spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+
                     ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
                     activity_d.Add(ractivitydata);
                     activity_pos = 0;
@@ -289,17 +299,23 @@ namespace TrackMyActV2.Pages
                     TimerData tdata = new TimerData();
                     //tdata.position = 0;             // Since this is a new activity, it won't have any data already associated with it.
                     tdata.time_in_seconds = (long)timerdata_TimeSpan.TotalSeconds;
-                    ractivitydata.lastattempt = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.lastattempt = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
                     ractivitydata.totalTime = ractivitydata.totalTime + tdata.time_in_seconds;
+                    tdata.running_personalBest = tdata.time_in_seconds;
+                    tdata.running_median = tdata.time_in_seconds;
+                    ractivitydata.median_in_sec = tdata.time_in_seconds;
                     //lastTime.Text = ractivitydata.lastattempt;
                     tdata.startTime = timerstartTime;
                     tdata.endTime = timerendTime;
                     ractivitydata.timer_data = new List<TimerData>();
                     ractivitydata.timer_data.Add(tdata);
-                    ractivitydata.personal_best = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
-                    ractivitydata.median = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
-                    ractivitydata.ninetypercentile = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.personal_best = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.median = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.ninetypercentile = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    ractivitydata.ninetypercentile_second = (long)timerdata_TimeSpan.TotalSeconds;
                     rtrackact.activity.Add(ractivitydata);
+                    previousAttempt.Text = "This time you spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+
                     personalBest.Text = ractivitydata.personal_best;
                     personalBestGrid.Opacity = 100;
                     MedianTextBlock.Text = ractivitydata.median;
@@ -326,18 +342,24 @@ namespace TrackMyActV2.Pages
                     }
                     time_in_seconds.Add((long)timerdata_TimeSpan.TotalSeconds);
                     long mediansec = (time_in_seconds.ElementAtOrDefault(time_in_seconds.Count / 2));//time_in_seconds[time_in_seconds.Count / 2];
+                    rtrackact.activity[activity_pos].median_in_sec = mediansec;
+                    tdata.running_median = mediansec;
                     rtrackact.activity[activity_pos].totalTime = rtrackact.activity[activity_pos].totalTime + tdata.time_in_seconds;
-                    rtrackact.activity[activity_pos].median = String.Format("{0:00}:{1:00}:{2:00}", mediansec / 3600, (mediansec / 60) % 60, mediansec % 60);
-                    rtrackact.activity[activity_pos].lastattempt = String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    rtrackact.activity[activity_pos].median = library.convertSecondsToString((long)mediansec);//String.Format("{0:00}:{1:00}:{2:00}", mediansec / 3600, (mediansec / 60) % 60, mediansec % 60);
+                    rtrackact.activity[activity_pos].lastattempt = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
                     rtrackact.activity[activity_pos].description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
                     // lastTime.Text = rtrackact.activity[activity_pos].lastattempt;
                     int pos = (int)(0.9 * (time_in_seconds.Count - 1) + 1); // 0 1 3 4 5 8
                     long ninentypercentilesecond = (time_in_seconds.ElementAtOrDefault(pos));
-                    rtrackact.activity[activity_pos].ninetypercentile = String.Format("{0:00}:{1:00}:{2:00}", ninentypercentilesecond / 3600, (ninentypercentilesecond / 60) % 60, ninentypercentilesecond % 60);
+                    rtrackact.activity[activity_pos].ninetypercentile_second = (long)ninentypercentilesecond;
+                    rtrackact.activity[activity_pos].ninetypercentile = library.convertSecondsToString((long)ninentypercentilesecond);//String.Format("{0:00}:{1:00}:{2:00}", ninentypercentilesecond / 3600, (ninentypercentilesecond / 60) % 60, ninentypercentilesecond % 60);
                     long personal_best = (time_in_seconds.ElementAtOrDefault(time_in_seconds.Count - 1));
-                    rtrackact.activity[activity_pos].personal_best = String.Format("{0:00}:{1:00}:{2:00}", (personal_best) / 3600, ((personal_best) / 60) % 60, (personal_best) % 60);
+                    rtrackact.activity[activity_pos].personal_best = library.convertSecondsToString((long)personal_best);//String.Format("{0:00}:{1:00}:{2:00}", (personal_best) / 3600, ((personal_best) / 60) % 60, (personal_best) % 60);
+                    tdata.running_personalBest = personal_best;
                     rtrackact.activity[activity_pos].timer_data.Add(tdata);
                     rtrackact.activity[activity_pos].isDelete = false;
+                    previousAttempt.Text = "This time you spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+
                     personalBest.Text = rtrackact.activity[activity_pos].personal_best;
                     personalBestGrid.Opacity = 100;
                     MedianTextBlock.Text = rtrackact.activity[activity_pos].median;
