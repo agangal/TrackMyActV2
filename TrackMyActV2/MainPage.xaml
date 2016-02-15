@@ -10,6 +10,7 @@
     mc:Ignorable="d">
     <Page.Resources>
         <converter:BooleanToVisibilityConvertor x:Key="visibilityConver"/>
+        <converter:secondsToStringConverter x:Key="secondsToString"></converter:secondsToStringConverter>
     </Page.Resources>
     <Page.Transitions>
         <TransitionCollection>
@@ -68,7 +69,7 @@
 
                         <StackPanel Orientation="Horizontal" Margin="23,2,5,10">
                             <TextBlock Text="You have spent" Foreground="#f3f4f7" FontSize="12"></TextBlock>
-                            <TextBlock Text="{x:Bind totalTime}" TextWrapping="WrapWholeWords" Margin="5,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
+                            <TextBlock Text="{x:Bind totalTime, Converter={StaticResource secondsToString}}" TextWrapping="WrapWholeWords" Margin="5,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
                             <TextBlock Text="seconds on this activity" TextWrapping="WrapWholeWords" Margin="3,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
 
                         </StackPanel>

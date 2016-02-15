@@ -85,11 +85,6 @@ namespace TrackMyActV2
             }
         }
 
-        //private void DataListView_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        //{
-        //    Debug.WriteLine("Manipulation Delta Event in C# generated event");
-        //}
-
         private void dataListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             ActivityData actd = (ActivityData)e.ClickedItem;
@@ -108,12 +103,12 @@ namespace TrackMyActV2
         private async void deleteItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             int pos = -1;
-            Debug.WriteLine("In Delete Item");
+            //Debug.WriteLine("In Delete Item");
             Button bt = sender as Button;
             ActivityData actd = (ActivityData)bt.DataContext;
             pos = (int)activityPos[actd.name];
             rtrackact.activity[pos].isDelete = true;
-            Debug.WriteLine("In Delete Item");
+            //Debug.WriteLine("In Delete Item");
             tmdata.Clear();
             activity.Clear();
             activityPos.Clear();
@@ -126,7 +121,7 @@ namespace TrackMyActV2
             }
             else
             {
-                ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = null;
+                ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = true;
                 library.deleteFile("activityDB");
                 Frame rootFrame = Window.Current.Content as Frame;
                 rootFrame.Navigate(typeof(TimerPage));
@@ -153,21 +148,7 @@ namespace TrackMyActV2
             {
                 tmdata.Add(tdata);
             }
-        }
-        //private void dataListView_DropCompleted(UIElement sender, DropCompletedEventArgs args)
-        //{
-        //    Debug.WriteLine("Drop Completed");
-        //}
-
-        //private void dataListView_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        //{
-        //    Debug.WriteLine("Manipulation Delta Event");
-        //}
-
-        //private void StackPanel_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        //{
-        //    Debug.WriteLine("Stack Panel Manipulation Delta");
-        //}
+        }        
     }
 
     public class BooleanToVisibilityConvertor : IValueConverter
@@ -183,6 +164,21 @@ namespace TrackMyActV2
                 return Visibility.Collapsed;
             }
             return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
+
+    public class secondsToStringConverter : IValueConverter
+    {
+        private Library lib = new Library();
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return ("You have spent " + lib.convertSecondsToString((long)value) + " on this activity");                                     
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
