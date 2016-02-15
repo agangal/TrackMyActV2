@@ -18,7 +18,7 @@ namespace TrackMyActV2.Libraries
         }
         public async Task<bool> checkIfFileExists(string filename)
         {
-            var item = await ApplicationData.Current.LocalFolder.TryGetItemAsync(filename);
+            var item = await ApplicationData.Current.RoamingFolder.TryGetItemAsync(filename);
             if (item == null)
             {
                 return false;
