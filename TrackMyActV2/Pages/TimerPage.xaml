@@ -393,9 +393,9 @@
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/images/trophyMainPage.png" 
                                HorizontalAlignment="Center"
-                               Width="20" 
+                               Width="25" 
                                Margin="5,5,0,15"
-                               Height="30"
+                               Height="25"
                                VerticalAlignment="Center"></Image>
                         <TextBlock Text="Your personal best is"
                            Foreground="White" 
@@ -407,7 +407,7 @@
                            Grid.ColumnSpan="6"
                            VerticalAlignment="Center"
                            Margin="5,5,0,15"
-                           FontSize="12"
+                           FontSize="14"
                            HorizontalAlignment="Center" d:IsLocked="True"></TextBlock>
 
                         <TextBlock x:Name="personalBest"
@@ -420,7 +420,7 @@
                            Grid.ColumnSpan="6"
                            VerticalAlignment="Center"
                            Margin="5,5,0,15"
-                           FontSize="12"
+                           FontSize="14"
                            HorizontalAlignment="Center" d:IsLocked="True"></TextBlock>
 
                     </StackPanel>
