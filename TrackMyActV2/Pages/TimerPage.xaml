@@ -8,10 +8,7 @@
     mc:Ignorable="d">
     <Page.Resources>
         <Storyboard x:Name="GoButtonPressed">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="StatisticsGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-10"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-40"/>
-            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="0:0:0.1" To="-10" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="StatisticsGrid" d:IsOptimized="True"/>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="border">
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.1">
                     <DiscreteObjectKeyFrame.Value>
@@ -150,13 +147,10 @@
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="StatisticsGrid" d:IsOptimized="True"/>
         </Storyboard>
 
         <Storyboard x:Name="StopButtonPressed">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="StatisticsGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-40"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-10"/>
-            </DoubleAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="border">
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.1">
                     <DiscreteObjectKeyFrame.Value>
@@ -304,6 +298,23 @@
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="StatisticsGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuadraticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuadraticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuadraticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
     <Page.Transitions>
@@ -388,7 +399,7 @@
                        Margin="0,40,0,0"
                        Grid.Row="1" Grid.ColumnSpan="6" 
                        FontSize="20" d:IsLocked="True"></TextBlock>
-                
+
                 <Grid Name="personalBestGrid" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/images/trophyMainPage.png" 
@@ -554,7 +565,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    
+
                 </Grid.ColumnDefinitions>
                 <Border BorderBrush="White" BorderThickness="0,1,1,0" Visibility="Collapsed">
                     <Button x:Name="Charts" Foreground="White" Height="45" Click="Charts_Click" Visibility="Collapsed" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
@@ -578,16 +589,16 @@
                             </StackPanel>
                         </Button.Content>
                     </Button>
-                </Border>                
+                </Border>
             </Grid>
 
             <Grid Grid.Row="3" x:Name="NavigationButtons_secondary" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
-                    
+
                     <ColumnDefinition Width="*"></ColumnDefinition>
 
                 </Grid.ColumnDefinitions>
-                
+
                 <Border BorderBrush="White" BorderThickness="0,1,0,0" Grid.Column="1">
                     <Button Visibility="Visible" x:Name="RecycleButton_Second" Click="RecycleButton_Click" Foreground="White" Height="45" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="1">
                         <Button.Content>
