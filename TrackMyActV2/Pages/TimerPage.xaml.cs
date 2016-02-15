@@ -44,7 +44,7 @@ namespace TrackMyActV2.Pages
         {
             this.InitializeComponent();
             library = new Library();
-            countLimit = 300;
+            countLimit = 200;
             activity_pos = -1;
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
            // this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -148,6 +148,7 @@ namespace TrackMyActV2.Pages
         {
             if ((introBox.Text != ""))
             {
+
                 ApplicationData.Current.RoamingSettings.Values["CurrentAct"] = introBox.Text;
                 ApplicationData.Current.RoamingSettings.Values["Description"] = description.Text;
                 introGrid.Visibility = Visibility.Collapsed;

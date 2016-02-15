@@ -14,7 +14,7 @@ namespace TrackMyActV2.Libraries
         private int countLimit;
         public Library()
         {
-            countLimit = 300;
+            countLimit = 200;
         }
         public async Task<bool> checkIfFileExists(string filename)
         {
