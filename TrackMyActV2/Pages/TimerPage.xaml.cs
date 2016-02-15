@@ -19,6 +19,8 @@ using System.Diagnostics;
 using TrackMyActV2.Libraries;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.Graphics.Display;
+using Windows.UI.Core;
+using Windows.System.Display;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace TrackMyActV2.Pages
@@ -35,6 +37,7 @@ namespace TrackMyActV2.Pages
         //private DispatcherTimer _timer;
         private DispatcherTimer timer;
         private Library library;
+        private readonly DisplayRequest _displayRequest = new DisplayRequest();
         private RootObjectTrackAct rtrackact;
         private long countLimit;
         private DateTime timerstartTime;
@@ -99,7 +102,7 @@ namespace TrackMyActV2.Pages
                         TimerData td = new TimerData();
                         td = rtrackact.activity[activity_pos].timer_data.Last();
                         //previousAttemptblock.Text = "Last time you spent";
-                        previousAttempt.Text = "Last time you spent " + library.convertSecondsToString((long)td.time_in_seconds); //String.Format("{0:00}:{1:00}:{2:00}", (long)td.time_in_seconds / 3600, ((long)td.time_in_seconds / 60) % 60, (long)td.time_in_seconds % 60);
+                        previousAttempt.Text = "Last time we spent " + library.convertSecondsToString((long)td.time_in_seconds); //String.Format("{0:00}:{1:00}:{2:00}", (long)td.time_in_seconds / 3600, ((long)td.time_in_seconds / 60) % 60, (long)td.time_in_seconds % 60);
                         NavigationButtons_secondary.Visibility = Visibility.Collapsed;
 
                     }
@@ -111,10 +114,28 @@ namespace TrackMyActV2.Pages
             }
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _displayRequest.RequestRelease();
+        }
+
         /***TimerPage Entry Points ***/
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            _displayRequest.RequestActive();
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame.CanGoBack)
+            {
+                // If we have pages in our in-app backstack and have opted in to showing back, do so
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            }
+            else
+            {
+                // Remove the UI from the title bar if there are no pages in our in-app back stack
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            }
+
             if ((bool)ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == true)
             {
                 mainPageGrid.Visibility = Visibility.Collapsed;
@@ -304,7 +325,7 @@ namespace TrackMyActV2.Pages
                     MedianTextBlock.Text = ractivitydata.median;
                     NinetyPercentileTextBlock.Text = ractivitydata.ninetypercentile;
                     StatisticsGrid.Opacity = 100;
-                    previousAttempt.Text = "This time you spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    previousAttempt.Text = "This time we spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
 
                     ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
                     activity_d.Add(ractivitydata);
@@ -346,7 +367,7 @@ namespace TrackMyActV2.Pages
                     ractivitydata.ninetypercentile = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
                     ractivitydata.ninetypercentile_second = (long)timerdata_TimeSpan.TotalSeconds;
                     rtrackact.activity.Add(ractivitydata);
-                    previousAttempt.Text = "This time you spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    previousAttempt.Text = "This time we spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
 
                     personalBest.Text = ractivitydata.personal_best;
                     personalBestGrid.Opacity = 100;
@@ -390,7 +411,7 @@ namespace TrackMyActV2.Pages
                     tdata.running_personalBest = personal_best;
                     rtrackact.activity[activity_pos].timer_data.Add(tdata);
                     rtrackact.activity[activity_pos].isDelete = false;
-                    previousAttempt.Text = "This time you spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
+                    previousAttempt.Text = "This time we spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
 
                     personalBest.Text = rtrackact.activity[activity_pos].personal_best;
                     personalBestGrid.Opacity = 100;
