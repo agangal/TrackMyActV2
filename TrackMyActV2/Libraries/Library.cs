@@ -51,7 +51,11 @@ namespace TrackMyActV2.Libraries
             }
             return response;
         }
-
+        public string convertSecondsToString(long seconds)
+        {            
+            string res = (((seconds / 3600) > 0) ? ((seconds / 3600).ToString() + " h ") : "") + ((((seconds / 60) % 60) > 0) ? (((seconds / 60) % 60).ToString() + " m ") : "") + (((seconds % 60) > 0) ? ((seconds % 60).ToString() + " s") : "");
+            return res;
+        }
         /// <summary>
         /// Writes the "response" to the "filename" file.
         /// </summary>
