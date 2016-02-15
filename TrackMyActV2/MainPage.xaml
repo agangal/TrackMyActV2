@@ -62,17 +62,11 @@
                                            HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                             <TextBlock Text="&#xE00F;" FontSize="14" Margin="10,10,60,10" FontFamily="Segoe MDL2 Assets" Foreground="#f3f4f7" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
-                            <Button Content="&#xE107;" x:Name="deleteItem" FontSize="14" FontFamily="Segoe MDL2 Assets" Foreground="#f3f4f7" Tapped="deleteItem_Tapped" VerticalAlignment="Center" HorizontalAlignment="Right"></Button>
+                            <Button Content="&#xE107;" Background="{x:Null}" x:Name="deleteItem" FontSize="14" FontFamily="Segoe MDL2 Assets" Foreground="#f3f4f7" Tapped="deleteItem_Tapped" VerticalAlignment="Center" HorizontalAlignment="Right"></Button>
                         </Grid>
                         <TextBlock Text="{x:Bind description}" Margin="23,2,5,10" Visibility="{x:Bind description, Converter={StaticResource visibilityConver}}"
                                    Foreground="#f3f4f7" FontSize="12"></TextBlock>
-
-                        <StackPanel Orientation="Horizontal" Margin="23,2,5,10">
-                            <TextBlock Text="You have spent" Foreground="#f3f4f7" FontSize="12"></TextBlock>
-                            <TextBlock Text="{x:Bind totalTime, Converter={StaticResource secondsToString}}" TextWrapping="WrapWholeWords" Margin="5,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
-                            <TextBlock Text="seconds on this activity" TextWrapping="WrapWholeWords" Margin="3,0,0,0" Foreground="#f3f4f7" FontSize="12"></TextBlock>
-
-                        </StackPanel>
+                        <TextBlock Text="{x:Bind totalTime, Converter={StaticResource secondsToString}}" TextWrapping="WrapWholeWords" Margin="23,2,2,10" Foreground="#f3f4f7" FontSize="12"></TextBlock>
                         <Border BorderBrush="#625F80" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="0" BorderThickness="0,0,0,1"></Border>
                     </StackPanel>
                 </DataTemplate>

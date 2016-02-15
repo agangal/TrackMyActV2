@@ -178,7 +178,7 @@ namespace TrackMyActV2
         private Library lib = new Library();
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return ("You have spent " + lib.convertSecondsToString((long)value) + " on this activity");                                     
+            return ("We have spent " + lib.convertSecondsToString((long)value) + " on this activity");                                     
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
