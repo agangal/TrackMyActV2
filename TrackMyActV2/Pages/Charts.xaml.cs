@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using TrackMyActV2.Models;
-using Syncfusion.UI.Xaml.Charts;
+
 using System.Diagnostics;
 using Windows.Storage;
 using Windows.Graphics.Display;
