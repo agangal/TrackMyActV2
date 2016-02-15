@@ -37,6 +37,10 @@ namespace TrackMyActV2.Models
         public DateTime startTime { get; set; }
         [DataMember]
         public DateTime endTime { get; set; }
+        [DataMember]
+        public long running_median { get; set; }
+        [DataMember]
+        public long running_personalBest { get; set; }
     }
 
     [DataContract]
@@ -47,7 +51,11 @@ namespace TrackMyActV2.Models
         [DataMember]
         public string median { get; set; }
         [DataMember]
+        public long median_in_sec { get; set; }
+        [DataMember]
         public string ninetypercentile { get; set; }
+        [DataMember]
+        public long ninetypercentile_second { get; set; }
         [DataMember]
         public string personal_best { get; set; }
         [DataMember]
