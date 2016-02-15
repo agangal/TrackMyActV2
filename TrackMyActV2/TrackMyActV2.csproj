@@ -183,17 +183,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Syncfusion 8.1 controls for Universal XAML, Version=13.4.0.53">
-      <Name>Syncfusion 8.1 controls for Universal XAML</Name>
-    </SDKReference>
     <SDKReference Include="WindowsDesktop, Version=10.0.10586.0">
       <Name>Windows Desktop Extensions for the UWP</Name>
     </SDKReference>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
-    </SDKReference>
-    <SDKReference Include="WindowsTeam, Version=10.0.10586.0">
-      <Name>Windows Team Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
