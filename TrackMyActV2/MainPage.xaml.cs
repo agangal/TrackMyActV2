@@ -45,7 +45,7 @@ namespace TrackMyActV2
             activityPos = new Hashtable();
             
             Loaded += MainPage_Loaded;
-            ApplicationData.Current.LocalSettings.Values["NewActivity"] = false;
+            ApplicationData.Current.RoamingSettings.Values["NewActivity"] = false;
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
         }
 
@@ -60,7 +60,7 @@ namespace TrackMyActV2
             activity.Clear();
             activityPos.Clear();
             //dataListView.ManipulationDelta += DataListView_ManipulationDelta;
-            if (ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)
+            if (ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == null)
             {
                 Frame rootFrame = Window.Current.Content as Frame;
                 rootFrame.Navigate(typeof(TimerPage));
@@ -69,14 +69,14 @@ namespace TrackMyActV2
             {
                 if(await library.checkIfFileExists("activityDB"))
                 {
-                    ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
+                    ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
                     string fileres = await library.readFile("activityDB");
                     rtrackact = TrackAct.trackactDataDeserializer(fileres);
                     updateUI(rtrackact);                   
                 }
                 else
                 {
-                    ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
+                    ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
                     Frame rootFrame = Window.Current.Content as Frame;
                     rootFrame.Navigate(typeof(TimerPage));
                 }
@@ -93,13 +93,13 @@ namespace TrackMyActV2
         {
             ActivityData actd = (ActivityData)e.ClickedItem;
             Frame rootFrame = Window.Current.Content as Frame;
-            ApplicationData.Current.LocalSettings.Values["NewActivity"] = false;
+            ApplicationData.Current.RoamingSettings.Values["NewActivity"] = false;
             rootFrame.Navigate(typeof(TimerPage), actd.name);            
         }
 
         private void addNewAct_Click(object sender, RoutedEventArgs e)
         {
-            ApplicationData.Current.LocalSettings.Values["NewActivity"] = true;
+            ApplicationData.Current.RoamingSettings.Values["NewActivity"] = true;
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(TimerPage));
         }
@@ -125,7 +125,7 @@ namespace TrackMyActV2
             }
             else
             {
-                ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = null;
+                ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = null;
                 library.deleteFile("activityDB");
                 Frame rootFrame = Window.Current.Content as Frame;
                 rootFrame.Navigate(typeof(TimerPage));

@@ -144,8 +144,8 @@ namespace TrackMyActV2.Pages
         //private void GoBack_Click(object sender, RoutedEventArgs e)
         //{
         //    Frame rootFrame = Window.Current.Content as Frame;
-        //    Debug.WriteLine((string)ApplicationData.Current.LocalSettings.Values["CurrentAct"]);
-        //    Debug.WriteLine(ApplicationData.Current.LocalSettings.Values["NewActivity"].ToString());
+        //    Debug.WriteLine((string)ApplicationData.Current.RoamingSettings.Values["CurrentAct"]);
+        //    Debug.WriteLine(ApplicationData.Current.RoamingSettings.Values["NewActivity"].ToString());
         //    if(rootFrame.CanGoBack)
         //    {
         //        rootFrame.GoBack();

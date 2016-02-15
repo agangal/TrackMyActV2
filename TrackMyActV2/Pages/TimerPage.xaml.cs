@@ -71,7 +71,7 @@ namespace TrackMyActV2.Pages
                 }
                 else
                 {
-                    activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
+                    activityName.Text = (string)ApplicationData.Current.RoamingSettings.Values["CurrentAct"];
                     rtrackact = TrackAct.trackactDataDeserializer(restring);
                     Debug.WriteLine("Not the first Launch");
                     
@@ -115,29 +115,29 @@ namespace TrackMyActV2.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)
+            if (ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == null)
             {
                 mainPageGrid.Visibility = Visibility.Collapsed;
                 introGrid.Visibility = Visibility.Visible;
             }
-            else if((bool)ApplicationData.Current.LocalSettings.Values["NewActivity"] == true)
+            else if((bool)ApplicationData.Current.RoamingSettings.Values["NewActivity"] == true)
             {
                 mainPageGrid.Visibility = Visibility.Collapsed;
                 introGrid.Visibility = Visibility.Visible;
-                ApplicationData.Current.LocalSettings.Values["NewActivity"] = false;
+                ApplicationData.Current.RoamingSettings.Values["NewActivity"] = false;
             }
             else
             {
                 string actname = null;
                 if (e.Parameter == null)
                 {
-                    actname = (String)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
+                    actname = (String)ApplicationData.Current.RoamingSettings.Values["CurrentAct"];
                 }
                 else
                 {
                     actname = (string)e.Parameter;
                 }
-                ApplicationData.Current.LocalSettings.Values["CurrentAct"] = actname;
+                ApplicationData.Current.RoamingSettings.Values["CurrentAct"] = actname;
                 introGrid.Visibility = Visibility.Collapsed;
                 mainPageGrid.Visibility = Visibility.Visible;
                 stuffToDoWhenNavigatedTo();
@@ -148,8 +148,8 @@ namespace TrackMyActV2.Pages
         {
             if ((introBox.Text != ""))
             {
-                ApplicationData.Current.LocalSettings.Values["CurrentAct"] = introBox.Text;
-                ApplicationData.Current.LocalSettings.Values["Description"] = description.Text;
+                ApplicationData.Current.RoamingSettings.Values["CurrentAct"] = introBox.Text;
+                ApplicationData.Current.RoamingSettings.Values["Description"] = description.Text;
                 introGrid.Visibility = Visibility.Collapsed;
                 mainPageGrid.Visibility = Visibility.Visible;
                 stuffToDoWhenNavigatedTo();
@@ -168,7 +168,7 @@ namespace TrackMyActV2.Pages
 
             StatisticsGrid.Opacity = 0;
             personalBestGrid.Opacity = 0;
-            activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
+            activityName.Text = (string)ApplicationData.Current.RoamingSettings.Values["CurrentAct"];
            
         }
         private void GoEllipse_Tapped(object sender, TappedRoutedEventArgs e)
@@ -186,8 +186,8 @@ namespace TrackMyActV2.Pages
 
         private void GoTextBlock_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
-            ApplicationData.Current.LocalSettings.Values["CurrentAct"] = activityName.Text;
+            activityName.Text = (string)ApplicationData.Current.RoamingSettings.Values["CurrentAct"];
+            ApplicationData.Current.RoamingSettings.Values["CurrentAct"] = activityName.Text;
             activityName.Visibility = Visibility.Visible;
             NavigationButtons_secondary.Visibility = Visibility.Collapsed;
             startTimer();
@@ -224,9 +224,9 @@ namespace TrackMyActV2.Pages
             RefreshUI();
             string res = TrackAct.trackactSerializer(rtrackact);
             await library.writeFile("activityDB", res);
-            if(ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)
+            if(ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == null)
             {
-                ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
+                ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
             }
         }
 
@@ -237,11 +237,11 @@ namespace TrackMyActV2.Pages
             personalBest.Visibility = Visibility.Visible;
             //string res = await library.readFile("activityDB");
             //RootObjectTrackAct rtrackact = TrackAct.trackactDataDeserializer(res);
-            if (ApplicationData.Current.LocalSettings.Values["FirstLaunch"] == null)    // if it's the first launch.
+            if (ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == null)    // if it's the first launch.
             {
                 try
                 {
-                    activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
+                    activityName.Text = (string)ApplicationData.Current.RoamingSettings.Values["CurrentAct"];
                     ActivityData ractivitydata = new ActivityData();
                     ractivitydata.name = activityName.Text;
                     ractivitydata.createdTime = DateTime.UtcNow;
@@ -260,7 +260,7 @@ namespace TrackMyActV2.Pages
                     //lastTime.Text = ractivitydata.lastattempt;
                     ractivitydata.timer_data = new List<TimerData>();
                     ractivitydata.timer_data.Add(tdata);
-                    ractivitydata.description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
+                    ractivitydata.description = (string)ApplicationData.Current.RoamingSettings.Values["Description"];
                     ractivitydata.personal_best = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
                     ractivitydata.median = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
                     ractivitydata.ninetypercentile = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds); //String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
@@ -274,7 +274,7 @@ namespace TrackMyActV2.Pages
                     StatisticsGrid.Opacity = 100;
                     previousAttempt.Text = "This time you spent " + library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
 
-                    ApplicationData.Current.LocalSettings.Values["FirstLaunch"] = false;
+                    ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
                     activity_d.Add(ractivitydata);
                     activity_pos = 0;
                 }
@@ -295,7 +295,7 @@ namespace TrackMyActV2.Pages
                     ractivitydata.createdTime = DateTime.UtcNow;
                     ractivitydata.totalTime = 0;
                     ractivitydata.isDelete = false;
-                    ractivitydata.description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
+                    ractivitydata.description = (string)ApplicationData.Current.RoamingSettings.Values["Description"];
                     TimerData tdata = new TimerData();
                     //tdata.position = 0;             // Since this is a new activity, it won't have any data already associated with it.
                     tdata.time_in_seconds = (long)timerdata_TimeSpan.TotalSeconds;
@@ -347,7 +347,7 @@ namespace TrackMyActV2.Pages
                     rtrackact.activity[activity_pos].totalTime = rtrackact.activity[activity_pos].totalTime + tdata.time_in_seconds;
                     rtrackact.activity[activity_pos].median = library.convertSecondsToString((long)mediansec);//String.Format("{0:00}:{1:00}:{2:00}", mediansec / 3600, (mediansec / 60) % 60, mediansec % 60);
                     rtrackact.activity[activity_pos].lastattempt = library.convertSecondsToString((long)timerdata_TimeSpan.TotalSeconds);//String.Format("{0:00}:{1:00}:{2:00}", (long)timerdata_TimeSpan.TotalSeconds / 3600, ((long)timerdata_TimeSpan.TotalSeconds / 60) % 60, (long)timerdata_TimeSpan.TotalSeconds % 60);
-                    rtrackact.activity[activity_pos].description = (string)ApplicationData.Current.LocalSettings.Values["Description"];
+                    rtrackact.activity[activity_pos].description = (string)ApplicationData.Current.RoamingSettings.Values["Description"];
                     // lastTime.Text = rtrackact.activity[activity_pos].lastattempt;
                     int pos = (int)(0.9 * (time_in_seconds.Count - 1) + 1); // 0 1 3 4 5 8
                     long ninentypercentilesecond = (time_in_seconds.ElementAtOrDefault(pos));
