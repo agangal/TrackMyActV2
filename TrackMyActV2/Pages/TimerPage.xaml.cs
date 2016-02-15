@@ -122,6 +122,7 @@ namespace TrackMyActV2.Pages
             }
             else if((bool)ApplicationData.Current.RoamingSettings.Values["NewActivity"] == true)
             {
+  
                 mainPageGrid.Visibility = Visibility.Collapsed;
                 introGrid.Visibility = Visibility.Visible;
                 ApplicationData.Current.RoamingSettings.Values["NewActivity"] = false;
@@ -144,16 +145,46 @@ namespace TrackMyActV2.Pages
             }
         }
 
-        private void introGo_Click(object sender, RoutedEventArgs e)
+        private async void introGo_Click(object sender, RoutedEventArgs e)
         {
             if ((introBox.Text != ""))
             {
-
-                ApplicationData.Current.RoamingSettings.Values["CurrentAct"] = introBox.Text;
-                ApplicationData.Current.RoamingSettings.Values["Description"] = description.Text;
-                introGrid.Visibility = Visibility.Collapsed;
-                mainPageGrid.Visibility = Visibility.Visible;
-                stuffToDoWhenNavigatedTo();
+                bool found = false;
+                if (await library.checkIfFileExists("activityDB"))
+                {
+                    found = false;
+                    RootObjectTrackAct ract = new RootObjectTrackAct();
+                    ract = TrackAct.trackactDataDeserializer(await library.readFile("activityDB"));
+                    for(int i = 0; i < ract.activity.Count; i++)
+                    {
+                        if((ract.activity[i].name).ToLower() == (introBox.Text).ToLower())
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == true)
+                    {
+                        introBox.Text = "";
+                        introBox.PlaceholderText = "This act already exists";
+                    }
+                    else
+                    {
+                        ApplicationData.Current.RoamingSettings.Values["CurrentAct"] = introBox.Text;
+                        ApplicationData.Current.RoamingSettings.Values["Description"] = description.Text;
+                        introGrid.Visibility = Visibility.Collapsed;
+                        mainPageGrid.Visibility = Visibility.Visible;
+                        stuffToDoWhenNavigatedTo();
+                    }
+                }
+                else
+                {
+                    ApplicationData.Current.RoamingSettings.Values["CurrentAct"] = introBox.Text;
+                    ApplicationData.Current.RoamingSettings.Values["Description"] = description.Text;
+                    introGrid.Visibility = Visibility.Collapsed;
+                    mainPageGrid.Visibility = Visibility.Visible;
+                    stuffToDoWhenNavigatedTo();
+                }
             }
             else
             {
