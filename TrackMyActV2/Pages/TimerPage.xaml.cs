@@ -115,7 +115,7 @@ namespace TrackMyActV2.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == null)
+            if ((bool)ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == true)
             {
                 mainPageGrid.Visibility = Visibility.Collapsed;
                 introGrid.Visibility = Visibility.Visible;
@@ -225,7 +225,7 @@ namespace TrackMyActV2.Pages
             RefreshUI();
             string res = TrackAct.trackactSerializer(rtrackact);
             await library.writeFile("activityDB", res);
-            if(ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == null)
+            if((bool)ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == true)
             {
                 ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
             }
@@ -238,7 +238,7 @@ namespace TrackMyActV2.Pages
             personalBest.Visibility = Visibility.Visible;
             //string res = await library.readFile("activityDB");
             //RootObjectTrackAct rtrackact = TrackAct.trackactDataDeserializer(res);
-            if (ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == null)    // if it's the first launch.
+            if ((bool)ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] == true)    // if it's the first launch.
             {
                 try
                 {

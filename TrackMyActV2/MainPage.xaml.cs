@@ -62,6 +62,7 @@ namespace TrackMyActV2
             //dataListView.ManipulationDelta += DataListView_ManipulationDelta;
             if (!await library.checkIfFileExists("activityDB"))
             {
+                ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = true;
                 Frame rootFrame = Window.Current.Content as Frame;
                 rootFrame.Navigate(typeof(TimerPage));
             }
