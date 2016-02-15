@@ -19,6 +19,7 @@ using TrackMyActV2.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Collections;
+using Windows.Graphics.Display;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace TrackMyActV2
@@ -42,8 +43,10 @@ namespace TrackMyActV2
             tmdata.CollectionChanged += Tmdata_CollectionChanged;
             rtrackact = new RootObjectTrackAct();
             activityPos = new Hashtable();
-            dataListView.ReorderMode = ListViewReorderMode.Enabled;
+            
             Loaded += MainPage_Loaded;
+            ApplicationData.Current.LocalSettings.Values["NewActivity"] = false;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
         }
 
         private void Tmdata_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
