@@ -446,6 +446,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock x:Name="textBlock1" HorizontalAlignment="Stretch" Margin="15"
                            TextAlignment="Center" Grid.Row="0" Grid.Column="1"
@@ -455,7 +456,7 @@
                            Grid.Row="0" Grid.Column="2"
                            TextAlignment="Center" TextWrapping="WrapWholeWords"
                            Foreground="White" FontSize="18"
-                           Text="03:23:22"/>
+                           />
                 <Border x:Name="border" Grid.Row="0" VerticalAlignment="Bottom" 
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
@@ -473,9 +474,23 @@
                        HorizontalAlignment="Center" 
                        Margin="15"
                        TextAlignment="Center" TextWrapping="WrapWholeWords"
-                       Foreground="White" FontSize="18"
-                       Text="03:23:22"/>
+                       Foreground="White" FontSize="18"/>
                 <Border x:Name="border1" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" 
+                        VerticalAlignment="Bottom" BorderBrush="#625F80"
+                        BorderThickness="0,0,0,1" d:IsHidden="True"></Border>
+                <TextBlock x:Name="previousAttemptblock" Grid.Row="2" Grid.Column="1"
+                       HorizontalAlignment="Stretch"
+                       Margin="15"
+                       TextAlignment="Center" 
+                       TextWrapping="WrapWholeWords"
+                       Foreground="White" FontSize="18"
+                       Text="Last time"></TextBlock>
+                <TextBlock x:Name="previousAttempt" Grid.Row="2" Grid.Column="2"
+                       HorizontalAlignment="Center" 
+                       Margin="15"
+                       TextAlignment="Center" TextWrapping="WrapWholeWords"
+                       Foreground="White" FontSize="18"/>
+                <Border x:Name="border3" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" 
                         VerticalAlignment="Bottom" BorderBrush="#625F80"
                         BorderThickness="0,0,0,1" d:IsHidden="True"></Border>
             </Grid>
@@ -532,18 +547,17 @@
                     <TextBlock.RenderTransform>
                         <CompositeTransform/>
                     </TextBlock.RenderTransform>
-
                 </TextBlock>
             </Grid>
 
             <Grid Grid.Row="3" x:Name="NavigationButtons">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     
                 </Grid.ColumnDefinitions>
-                <Border BorderBrush="White" BorderThickness="0,1,1,0" Visibility="Visible">
-                    <Button x:Name="Charts" Foreground="White" Height="45" Click="Charts_Click" Visibility="Visible" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
+                <Border BorderBrush="White" BorderThickness="0,1,1,0" Visibility="Collapsed">
+                    <Button x:Name="Charts" Foreground="White" Height="45" Click="Charts_Click" Visibility="Collapsed" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="0">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <TextBlock Text="&#xE162;" Foreground="#f3f4f7" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets"></TextBlock>
@@ -565,7 +579,29 @@
                         </Button.Content>
                     </Button>
                 </Border>                
-            </Grid>            
+            </Grid>
+
+            <Grid Grid.Row="3" x:Name="NavigationButtons_secondary" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                
+                <Border BorderBrush="White" BorderThickness="0,1,0,0" Grid.Column="1">
+                    <Button Visibility="Visible" x:Name="RecycleButton_Second" Click="RecycleButton_Click" Foreground="White" Height="45" FontSize="10" Background="{x:Null}" HorizontalAlignment="Stretch" Grid.Column="1">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets"                                     Foreground="White"
+                                    VerticalAlignment="Center" Text="&#xE12A;"></TextBlock>
+                                <TextBlock Foreground="White" Margin="10,0,0,0"
+                                           Text="Activity Board" CharacterSpacing="40"
+                                           VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </Border>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

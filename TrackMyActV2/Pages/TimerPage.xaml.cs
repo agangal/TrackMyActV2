@@ -18,6 +18,7 @@ using Windows.Storage;
 using System.Diagnostics;
 using TrackMyActV2.Libraries;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.Graphics.Display;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace TrackMyActV2.Pages
@@ -45,6 +46,8 @@ namespace TrackMyActV2.Pages
             library = new Library();
             countLimit = 300;
             activity_pos = -1;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+           // this.NavigationCacheMode = NavigationCacheMode.Required;
             //timerdata = "00:00:00";
         }
 
@@ -62,8 +65,9 @@ namespace TrackMyActV2.Pages
                 string restring = await library.readFile("activityDB");
                 if (String.IsNullOrEmpty(restring))
                 {
+                    NavigationButtons.Visibility = Visibility.Collapsed;
+                    NavigationButtons_secondary.Visibility = Visibility.Visible;
                     firstLaunch();
-
                 }
                 else
                 {
@@ -83,13 +87,17 @@ namespace TrackMyActV2.Pages
                     {
                         StatisticsGrid.Opacity = 0;
                         personalBestGrid.Opacity = 0;
-                        
+                        NavigationButtons.Visibility = Visibility.Collapsed;
+                        NavigationButtons_secondary.Visibility = Visibility.Visible;
                     }
                     else
                     {
                         MedianTextBlock.Text = rtrackact.activity[activity_pos].median;
                         NinetyPercentileTextBlock.Text = rtrackact.activity[activity_pos].ninetypercentile;
                         personalBest.Text = rtrackact.activity[activity_pos].personal_best;
+                        NavigationButtons.Visibility = Visibility.Visible;
+                        NavigationButtons_secondary.Visibility = Visibility.Collapsed;
+
                     }
                 }
             }
@@ -116,7 +124,15 @@ namespace TrackMyActV2.Pages
             }
             else
             {
-                string actname = (string)e.Parameter;
+                string actname = null;
+                if (e.Parameter == null)
+                {
+                    actname = (String)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
+                }
+                else
+                {
+                    actname = (string)e.Parameter;
+                }
                 ApplicationData.Current.LocalSettings.Values["CurrentAct"] = actname;
                 introGrid.Visibility = Visibility.Collapsed;
                 mainPageGrid.Visibility = Visibility.Visible;
@@ -143,7 +159,9 @@ namespace TrackMyActV2.Pages
 
         private void firstLaunch()
         {
-            
+            NavigationButtons.Visibility = Visibility.Collapsed;
+            NavigationButtons_secondary.Visibility = Visibility.Visible;
+
             StatisticsGrid.Opacity = 0;
             personalBestGrid.Opacity = 0;
             activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
@@ -152,6 +170,7 @@ namespace TrackMyActV2.Pages
         private void GoEllipse_Tapped(object sender, TappedRoutedEventArgs e)
         {
             activityName.Visibility = Visibility.Visible;
+            NavigationButtons_secondary.Visibility = Visibility.Collapsed;
             startTimer();
         }
 
@@ -165,19 +184,23 @@ namespace TrackMyActV2.Pages
         {
             activityName.Text = (string)ApplicationData.Current.LocalSettings.Values["CurrentAct"];
             ApplicationData.Current.LocalSettings.Values["CurrentAct"] = activityName.Text;
-            activityName.Visibility = Visibility.Visible;            
-           
+            activityName.Visibility = Visibility.Visible;
+            NavigationButtons_secondary.Visibility = Visibility.Collapsed;
             startTimer();
         }
 
         private void StopEllipse_Tapped(object sender, TappedRoutedEventArgs e)
         {
             stopTimer();
+            
+            NavigationButtons_secondary.Visibility = Visibility.Collapsed;
+
         }
 
         private void StopTextBlock_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            stopTimer();
+            stopTimer();           
+            NavigationButtons_secondary.Visibility = Visibility.Collapsed;
         }
 
         private async void stopTimer()
@@ -282,7 +305,7 @@ namespace TrackMyActV2.Pages
                     MedianTextBlock.Text = ractivitydata.median;
                     NinetyPercentileTextBlock.Text = ractivitydata.ninetypercentile;
                     StatisticsGrid.Opacity = 100;
-                    activity_pos = 0;
+                    activity_pos = rtrackact.activity.Count - 1;
                 }
                 else
                 {
@@ -383,8 +406,10 @@ namespace TrackMyActV2.Pages
             timerToChartsTransfer transfer = new timerToChartsTransfer();
             
             transfer.activity_pos = activity_pos;
+            transfer.trackact = new RootObjectTrackAct();
+            transfer.trackact = rtrackact;
             Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(Charts), rtrackact);
+            rootFrame.Navigate(typeof(Charts), transfer);
         }        
         
         
