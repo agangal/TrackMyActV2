@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="17158gangal.TrackMyAct" Publisher="CN=CFCD7603-2705-427F-AA6D-77A13785BD07" Version="1.1.5.0" />
+  <Identity Name="17158gangal.TrackMyAct" Publisher="CN=CFCD7603-2705-427F-AA6D-77A13785BD07" Version="1.1.6.0" />
   <mp:PhoneIdentity PhoneProductId="4ec1460d-df9c-4dd0-adf0-010d63ca9caf" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Track My Act</DisplayName>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="TrackMyActV2.App">
-      <uap:VisualElements DisplayName="Seconds" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="TrackMyActV2" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Track My Act" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="TrackMyActV2" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="wide310x150Logo" />

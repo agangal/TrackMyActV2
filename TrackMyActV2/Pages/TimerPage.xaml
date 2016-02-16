@@ -326,7 +326,7 @@
     <Grid>
         <Grid x:Name="introGrid" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel>
-                <TextBlock Text="SECONDS" HorizontalAlignment="Center" 
+                <TextBlock Text="Track My Act" HorizontalAlignment="Center" 
                                VerticalAlignment="Center" FontWeight="SemiBold"
                                FontSize="20" CharacterSpacing="200"
                                FontFamily="Segoe UI"
@@ -379,7 +379,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock Text="SECONDS" Grid.Row="0"
+                    <TextBlock Text="Track My Act" Grid.Row="0"
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center" FontWeight="SemiBold"
                                FontSize="20" CharacterSpacing="200"
