@@ -35,10 +35,10 @@
         <TextBlock Grid.Row="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"
                    Text="Dashboard" Foreground="White" CharacterSpacing="60"
                    TextAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>
-        <Button HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" Name="SettingsButton" Click="SettingsButton_Click" Background="{x:Null}" Grid.Row="1">
+        <Button HorizontalAlignment="Right" Margin="0,0,0,0" Width="50" VerticalAlignment="Stretch" Name="SettingsButton" Click="SettingsButton_Click" Grid.Row="1">
             <Button.Content>
                 <TextBlock Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"
-                   FontFamily="Segoe MDL2 Assets" Text="&#xE115;" Foreground="White" FontSize="22"></TextBlock>
+                   FontFamily="Segoe MDL2 Assets" Text="&#xE115;" Foreground="White" FontSize="15"></TextBlock>
             </Button.Content>
         </Button>
         <Border BorderBrush="White" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Bottom" BorderThickness="0,0,0,1"></Border>
