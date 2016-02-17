@@ -148,7 +148,12 @@ namespace TrackMyActV2
             {
                 tmdata.Add(tdata);
             }
-        }        
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class BooleanToVisibilityConvertor : IValueConverter
