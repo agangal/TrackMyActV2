@@ -53,11 +53,9 @@
                   Grid.Row="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>                    
                 </Style>
-            </ListView.ItemContainerStyle>
-            
+            </ListView.ItemContainerStyle>            
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:ActivityData">
                     <StackPanel Orientation="Vertical" Margin="0,5,5,0" HorizontalAlignment="Stretch">
@@ -72,7 +70,7 @@
                         </Grid>
                         <TextBlock Text="{x:Bind description}" Margin="23,0,5,5" Visibility="{x:Bind description, Converter={StaticResource visibilityConver}}"
                                    Foreground="#f3f4f7" FontSize="12"></TextBlock>
-                        <TextBlock Text="{x:Bind totalTime, Converter={StaticResource secondsToString}}" TextWrapping="WrapWholeWords" Margin="23,02,10" Foreground="#f3f4f7" FontSize="12"></TextBlock>
+                        <TextBlock Text="{x:Bind totalTime, Converter={StaticResource secondsToString}}" TextWrapping="WrapWholeWords" Margin="23,0,2,10" Foreground="#f3f4f7" FontSize="12"></TextBlock>
                         <Border BorderBrush="#625F80" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="0" BorderThickness="0,0,0,1"></Border>
                     </StackPanel>
                 </DataTemplate>
