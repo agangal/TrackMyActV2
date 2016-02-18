@@ -4,50 +4,13 @@
     xmlns:local="using:TrackMyActV2.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   
+    xmlns:Charts="using:Syncfusion.UI.Xaml.Charts"
     x:Class="TrackMyActV2.Pages.Charts"
     mc:Ignorable="d">
 
     <Grid x:Name="MainGrid">
-        <!--<FlipView>            
-            <Charts:SfChart x:Name="myChart" HorizontalAlignment="Stretch" 
-                        VerticalAlignment="Stretch" Margin="10"
-                        Foreground="#f3f4f7" Height="Auto" Width="Auto" Palette="Metro">                
-                <Charts:SfChart.PrimaryAxis>
-                    <Charts:CategoryAxis Header="Date (dd/mm)" Foreground="#f3f4f7" FontSize="15"></Charts:CategoryAxis>
-                </Charts:SfChart.PrimaryAxis>
-                <Charts:SfChart.SecondaryAxis>
-                    <Charts:NumericalAxis Header="Time (in Seconds)" Foreground="#f3f4f7" FontSize="15"></Charts:NumericalAxis>
-                </Charts:SfChart.SecondaryAxis>
-                <Charts:SfChart.Behaviors>
-                    <Charts:ChartZoomPanBehavior EnableMouseWheelZooming="True"></Charts:ChartZoomPanBehavior>
-                    <Charts:ChartZoomPanBehavior EnablePinchZooming="True"></Charts:ChartZoomPanBehavior>
-                    <Charts:ChartZoomPanBehavior EnablePanning="True"></Charts:ChartZoomPanBehavior>
-                </Charts:SfChart.Behaviors>
-                <Charts:ColumnSeries Label="Time" ItemsSource="{Binding Demands}" EnableAnimation="True"
-                                 XBindingPath="Demand" YBindingPath="seconds"></Charts:ColumnSeries>
-            </Charts:SfChart>
-
-            <Charts:SfChart x:Name="individualChart" HorizontalAlignment="Stretch" 
-                        VerticalAlignment="Stretch" Margin="10"
-                        Foreground="#f3f4f7" Height="Auto" Width="Auto" Palette="Metro">
-                <Charts:SfChart.Header>
-                    <TextBlock Text="Time spent (separately)" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#f3f4f7" ></TextBlock>
-                </Charts:SfChart.Header>
-                <Charts:SfChart.PrimaryAxis>
-                    <Charts:CategoryAxis Header="Date-Time" Foreground="#f3f4f7" FontSize="15"></Charts:CategoryAxis>
-                </Charts:SfChart.PrimaryAxis>
-                <Charts:SfChart.SecondaryAxis>
-                    <Charts:NumericalAxis Header="Time (in Seconds)" Foreground="#f3f4f7" FontSize="15"></Charts:NumericalAxis>
-                </Charts:SfChart.SecondaryAxis>
-                <Charts:SfChart.Behaviors>
-                    <Charts:ChartZoomPanBehavior EnableMouseWheelZooming="True"></Charts:ChartZoomPanBehavior>
-                    <Charts:ChartZoomPanBehavior EnablePinchZooming="True"></Charts:ChartZoomPanBehavior>
-                    <Charts:ChartZoomPanBehavior EnablePanning="True"></Charts:ChartZoomPanBehavior>
-                </Charts:SfChart.Behaviors>
-                <Charts:ColumnSeries Label="Time" ItemsSource="{Binding Demands}" EnableAnimation="True"
-                                 XBindingPath="Demand" YBindingPath="seconds"></Charts:ColumnSeries>
-            </Charts:SfChart>
-        </FlipView>-->
+        <FlipView x:Name="mainFlipView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Charts:SfChart x:Name="myChart"></Charts:SfChart>
+        </FlipView>
     </Grid>
 </Page>
