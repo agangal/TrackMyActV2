@@ -479,7 +479,7 @@ namespace TrackMyActV2.Pages
         {
             Debug.WriteLine("Charts clicked");
             timerToChartsTransfer transfer = new timerToChartsTransfer();
-            
+           
             transfer.activity_pos = activity_pos;
             transfer.trackact = new RootObjectTrackAct();
             transfer.trackact = rtrackact;
