@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -7,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,6 +37,13 @@ namespace TrackMyActV2
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += OnResuming;
+        }
+
+        private void OnResuming(object sender, object e)
+        {
+            Debug.WriteLine("App resuming");
+            ApplicationData.Current.LocalSettings.Values["Resuming"] = "In OnResuming";
         }
 
         /// <summary>
@@ -123,8 +132,10 @@ namespace TrackMyActV2
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            Debug.WriteLine("App Suspending");
+            ApplicationData.Current.LocalSettings.Values["Resuming"] = "In OnSuspending";
+            ApplicationData.Current.LocalSettings.Values["DateTimeOnSuspend"] = DateTime.UtcNow;
             deferral.Complete();
-        }
+        }        
     }
 }

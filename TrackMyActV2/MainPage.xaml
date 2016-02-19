@@ -31,7 +31,7 @@
         <!--<Button Grid.Row="0" HorizontalAlignment="Center" IsEnabled="True"
                 Content="Chart" Name="ChartButton" Click="ChartButton_Click"></Button> -->
         <Border BorderBrush="White" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Bottom" BorderThickness="0,0,0,1"></Border>
-
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Name="resume" Visibility="Collapsed" Foreground="#f3f4f7"></TextBlock>
         <TextBlock Grid.Row="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"
                    Text="Dashboard" Foreground="White" CharacterSpacing="60"
                    TextAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>

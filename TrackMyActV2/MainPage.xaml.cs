@@ -59,28 +59,41 @@ namespace TrackMyActV2
             tmdata.Clear();
             activity.Clear();
             activityPos.Clear();
+
+            resume.Text = ApplicationData.Current.LocalSettings.Values["Resuming"] == null ? "Not initialized" : (string)ApplicationData.Current.LocalSettings.Values["Resuming"];
+            ApplicationData.Current.LocalSettings.Values["Resuming"] = "temp_empty";
             //dataListView.ManipulationDelta += DataListView_ManipulationDelta;
             if (!await library.checkIfFileExists("activityDB"))
             {
                 ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = true;
                 Frame rootFrame = Window.Current.Content as Frame;
+                ApplicationData.Current.LocalSettings.Values["TimerRunning"] = false;
                 rootFrame.Navigate(typeof(TimerPage));
             }
             else
             {
-                if(await library.checkIfFileExists("activityDB"))
+                if (await library.checkIfFileExists("activityDB"))
                 {
                     ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
+                    if (ApplicationData.Current.LocalSettings.Values["TimerRunning"] != null)
+                    {
+                        if ((bool)ApplicationData.Current.LocalSettings.Values["TimerRunning"] == true)
+                        {
+                            ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
+                            Frame rootFrame = Window.Current.Content as Frame;
+                            rootFrame.Navigate(typeof(TimerPage));
+                        }
+                    }
                     string fileres = await library.readFile("activityDB");
                     rtrackact = TrackAct.trackactDataDeserializer(fileres);
-                    updateUI(rtrackact);                   
+                    updateUI(rtrackact);
                 }
                 else
                 {
                     ApplicationData.Current.RoamingSettings.Values["FirstLaunch"] = false;
                     Frame rootFrame = Window.Current.Content as Frame;
                     rootFrame.Navigate(typeof(TimerPage));
-                }
+                }              
                                
             }
         }
@@ -152,7 +165,8 @@ namespace TrackMyActV2
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(Settings));
         }
     }
 
