@@ -63,7 +63,6 @@ namespace TrackMyActV2.Pages
             rtrackact = new RootObjectTrackAct();
             if (res)
             {
-
                 //activityComboBox actiboxtemp = new activityComboBox();
                 string restring = await library.readFile("activityDB");
                 if (String.IsNullOrEmpty(restring))
@@ -104,7 +103,6 @@ namespace TrackMyActV2.Pages
                         //previousAttemptblock.Text = "Last time you spent";
                         previousAttempt.Text = "Last time we spent " + library.convertSecondsToString((long)td.time_in_seconds); //String.Format("{0:00}:{1:00}:{2:00}", (long)td.time_in_seconds / 3600, ((long)td.time_in_seconds / 60) % 60, (long)td.time_in_seconds % 60);
                         NavigationButtons_secondary.Visibility = Visibility.Collapsed;
-
                     }
                 }
             }
@@ -388,12 +386,13 @@ namespace TrackMyActV2.Pages
                     }
                     tdata.time_in_seconds = (long)timerdata_TimeSpan.TotalSeconds;
 
-                    SortedSet<long> time_in_seconds = new SortedSet<long>();
+                    List<long> time_in_seconds = new List<long>();
                     for (int i = 0; i < rtrackact.activity[activity_pos].timer_data.Count; i++)
                     {
                         time_in_seconds.Add(rtrackact.activity[activity_pos].timer_data[i].time_in_seconds);
                     }
                     time_in_seconds.Add((long)timerdata_TimeSpan.TotalSeconds);
+                    time_in_seconds.Sort();
                     long mediansec = (time_in_seconds.ElementAtOrDefault(time_in_seconds.Count / 2));//time_in_seconds[time_in_seconds.Count / 2];
                     rtrackact.activity[activity_pos].median_in_sec = mediansec;
                     tdata.running_median = mediansec;
