@@ -69,11 +69,12 @@ namespace TrackMyActV2.Pages
             //SfChart chart = new SfChart();
             myChart.HorizontalAlignment = HorizontalAlignment.Center;
             myChart.VerticalAlignment = VerticalAlignment.Center;
-            myChart.Header = "Time spent on ";
+            myChart.Header = "Time and Median";
             myChart.Foreground = new SolidColorBrush(Colors.White);
 
             DateTimeCategoryAxis primaryCategoryAxis = new DateTimeCategoryAxis();
-            primaryCategoryAxis.Interval = 1;            
+            primaryCategoryAxis.Interval = 1;
+            primaryCategoryAxis.Header = "DateTime (dd/MM hh:mm AM/PM)";         
             primaryCategoryAxis.LabelFormat = "dd/MM hh:mm tt";
             primaryCategoryAxis.Foreground = new SolidColorBrush(Colors.White);
             myChart.PrimaryAxis = primaryCategoryAxis;            
