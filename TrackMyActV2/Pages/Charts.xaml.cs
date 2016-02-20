@@ -88,7 +88,7 @@ namespace TrackMyActV2.Pages
             SplineSeries series2 = new SplineSeries();
             series2.ItemsSource = Demands;
             series2.ShowTooltip = true;
-            series2.Label = "Median";
+            series2.Label = "Median Time";
             series2.XBindingPath = "Demand";
             series2.YBindingPath = "runningMedian";
             series2.EnableAnimation = true;

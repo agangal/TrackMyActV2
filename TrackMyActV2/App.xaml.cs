@@ -134,7 +134,7 @@ namespace TrackMyActV2
             var deferral = e.SuspendingOperation.GetDeferral();
             Debug.WriteLine("App Suspending");
             ApplicationData.Current.LocalSettings.Values["Resuming"] = "In OnSuspending";
-            ApplicationData.Current.LocalSettings.Values["DateTimeOnSuspend"] = DateTime.UtcNow;
+            ApplicationData.Current.LocalSettings.Values["DateTimeOnSuspend"] = (DateTime.UtcNow).ToString(); ;
             deferral.Complete();
         }        
     }
