@@ -21,6 +21,7 @@ using System.Diagnostics;
 using Windows.Storage;
 using Windows.Graphics.Display;
 using System.Collections;
+using Microsoft.ApplicationInsights;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace TrackMyActV2.Pages
@@ -41,13 +42,14 @@ namespace TrackMyActV2.Pages
             Demands = new ObservableCollection<TimeTable>();
             VisualStateManager.GoToState(this, "Landscape", true);
             transfer = new timerToChartsTransfer();
-            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
+            //DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var transfer = (timerToChartsTransfer)e.Parameter;
-            
+            var tc = new TelemetryClient();
+            tc.TrackEvent("Charts Viewed");
             Demands.Clear();
             //for(int i=0; i<transfer.trackact.activity[(int)transfer.activity_pos].timer_data.Count; i++)
             //{
@@ -86,6 +88,7 @@ namespace TrackMyActV2.Pages
             SplineSeries series2 = new SplineSeries();
             series2.ItemsSource = Demands;
             series2.ShowTooltip = true;
+            series2.Label = "Median";
             series2.XBindingPath = "Demand";
             series2.YBindingPath = "runningMedian";
             series2.EnableAnimation = true;

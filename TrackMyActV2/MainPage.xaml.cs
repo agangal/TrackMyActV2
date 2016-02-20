@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Collections;
 using Windows.Graphics.Display;
+using Microsoft.ApplicationInsights;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace TrackMyActV2
@@ -131,6 +132,7 @@ namespace TrackMyActV2
             {               
                 string res = TrackAct.trackactSerializer(rtrackact);
                 await library.writeFile("activityDB", res);
+               
             }
             else
             {
@@ -144,7 +146,7 @@ namespace TrackMyActV2
 
         private  void updateUI(RootObjectTrackAct rtact)
         {
-            
+            var tc = new TelemetryClient();
             var activityD = rtact.activity;
             int i = 0;
             foreach (var actv in activityD)
@@ -156,11 +158,12 @@ namespace TrackMyActV2
                     i++;
                 }
             }
-            var timedata = rtrackact.activity[0].timer_data;
-            foreach (var tdata in timedata)
-            {
-                tmdata.Add(tdata);
-            }
+            //var timedata = rtrackact.activity[0].timer_data;
+            //foreach (var tdata in timedata)
+            //{
+            //    tmdata.Add(tdata);
+            //}
+            tc.TrackMetric("Number of Activities", rtact.activity.Count);
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
