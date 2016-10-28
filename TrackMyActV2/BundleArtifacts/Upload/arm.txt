@@ -1,0 +1,6 @@
+MainPackage=D:\VS_Projects\TrackMyActV2\TrackMyActV2\bin\ARM\Release\Upload\TrackMyActV2_1.2.5.0_ARM.appx
+SymbolPackage=D:\VS_Projects\TrackMyActV2\TrackMyActV2\AppPackages\TrackMyActV2_1.2.5.0\TrackMyActV2_1.2.5.0_ARM.appxsym
+ResourcePack=D:\VS_Projects\TrackMyActV2\TrackMyActV2\_scale-100.appx
+ResourcePack=D:\VS_Projects\TrackMyActV2\TrackMyActV2\_scale-125.appx
+ResourcePack=D:\VS_Projects\TrackMyActV2\TrackMyActV2\_scale-150.appx
+ResourcePack=D:\VS_Projects\TrackMyActV2\TrackMyActV2\_scale-400.appx

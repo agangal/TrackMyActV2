@@ -45,7 +45,7 @@
             <StackPanel Orientation="Horizontal" Margin="30,0,10,10">
                 <TextBlock Text="Twitter" VerticalAlignment="Center" Margin="0,10,5,10" Foreground="#f3f4f7"></TextBlock>
                 <TextBlock VerticalAlignment="Center" Margin="41,10,10,10">
-                <Hyperlink NavigateUri="https://twitter.com/gangal_devs">@gangal_devs</Hyperlink>
+                <Hyperlink NavigateUri="Twitter:profile?username=@gangal_devs">@gangal_devs</Hyperlink>
                 </TextBlock>
             </StackPanel>
         </StackPanel>

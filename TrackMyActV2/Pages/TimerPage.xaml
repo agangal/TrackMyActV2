@@ -324,7 +324,7 @@
     </Page.Transitions>
 
     <Grid>
-        <Grid x:Name="introGrid" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid x:Name="introGrid" x:DeferLoadStrategy="Lazy" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel>
                 <TextBlock Text="Track My Act" HorizontalAlignment="Center" 
                                VerticalAlignment="Center" FontWeight="SemiBold"
@@ -536,7 +536,7 @@
                        Foreground="White" Text="00:00:00"></TextBlock>
                 <Ellipse x:Name="StopEllipse" 
                          Stroke="White" Visibility="Collapsed"
-                         StrokeThickness="2"
+                         StrokeThickness="2" 
                          Tapped="StopEllipse_Tapped"
                          Height="120" Fill="{x:Null}" Width="120" RenderTransformOrigin="0.5,0.5">
                     <Ellipse.RenderTransform>
@@ -548,7 +548,7 @@
                        HorizontalAlignment="Center"
                        Tapped="StopTextBlock_Tapped"
                        VerticalAlignment="Center"
-                       FontSize="30"
+                       FontSize="30" 
                        Foreground="White" Text="STOP" RenderTransformOrigin="0.5,0.5">
                     <TextBlock.RenderTransform>
                         <CompositeTransform/>

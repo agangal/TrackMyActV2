@@ -42,7 +42,7 @@ namespace TrackMyActV2.Pages
             Demands = new ObservableCollection<TimeTable>();
             VisualStateManager.GoToState(this, "Landscape", true);
             transfer = new timerToChartsTransfer();
-            //DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.None;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -76,7 +76,8 @@ namespace TrackMyActV2.Pages
 
             DateTimeCategoryAxis primaryCategoryAxis = new DateTimeCategoryAxis();
             primaryCategoryAxis.Interval = 1;
-            primaryCategoryAxis.Header = "DateTime (dd/MM hh:mm AM/PM)";         
+            primaryCategoryAxis.Header = "Timer Started";  
+                 
             primaryCategoryAxis.LabelFormat = "dd/MM hh:mm tt";
             primaryCategoryAxis.Foreground = new SolidColorBrush(Colors.White);
             myChart.PrimaryAxis = primaryCategoryAxis;            

@@ -1,0 +1,2 @@
+MainPackage=D:\VS_Projects\TrackMyActV2\TrackMyActV2\bin\x86\Release\Upload\TrackMyActV2_1.2.5.0_x86.appx
+SymbolPackage=D:\VS_Projects\TrackMyActV2\TrackMyActV2\AppPackages\TrackMyActV2_1.2.5.0\TrackMyActV2_1.2.5.0_x86.appxsym

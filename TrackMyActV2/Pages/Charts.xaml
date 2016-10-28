@@ -9,17 +9,30 @@
     mc:Ignorable="d">
 
     <Grid x:Name="MainGrid">
-        <FlipView x:Name="mainFlipView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Charts:SfChart x:Name="myChart" Palette="Custom">
-                <Charts:SfChart.ColorModel>
-                    <Charts:ChartColorModel>
-                        <Charts:ChartColorModel.CustomBrushes>
-                            <SolidColorBrush Color="#1ba1e2" Opacity="0.5"></SolidColorBrush>
-                            <SolidColorBrush Color="#6ED19D"></SolidColorBrush>
-                        </Charts:ChartColorModel.CustomBrushes>
-                    </Charts:ChartColorModel>
-                </Charts:SfChart.ColorModel>
-            </Charts:SfChart>
+        <FlipView x:Name="mainFlipView" Background="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="0.2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Charts:SfChart x:Name="myChart" Palette="Custom" Grid.Row="1" Grid.Column="1">
+                    <Charts:SfChart.ColorModel>
+                        <Charts:ChartColorModel>
+                            <Charts:ChartColorModel.CustomBrushes>
+                                <SolidColorBrush Color="#1ba1e2" Opacity="0.5"></SolidColorBrush>
+                                <SolidColorBrush Color="#6ED19D"></SolidColorBrush>
+                            </Charts:ChartColorModel.CustomBrushes>
+                        </Charts:ChartColorModel>
+                    </Charts:SfChart.ColorModel>
+                </Charts:SfChart>
+            </Grid>
+            
         </FlipView>
     </Grid>
 </Page>

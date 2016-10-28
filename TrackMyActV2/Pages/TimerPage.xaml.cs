@@ -158,6 +158,8 @@ namespace TrackMyActV2.Pages
                     actname = (string)e.Parameter;
                 }
                 ApplicationData.Current.RoamingSettings.Values["CurrentAct"] = actname;
+                //introGrid.Visibility = Visibility.Collapsed;
+                this.FindName("introGrid");
                 introGrid.Visibility = Visibility.Collapsed;
                 mainPageGrid.Visibility = Visibility.Visible;
                 stuffToDoWhenNavigatedTo();
